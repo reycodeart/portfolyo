@@ -1,0 +1,128 @@
+[
+  {
+    "id": "python",
+    "label": { "tr": "Python", "en": "Python" },
+    "items": [
+      {
+        "project": "keystroke-dynamics",
+        "claim": { "tr": "One-Class SVM detektörü ve EER hesabı", "en": "One-Class SVM detector and EER computation" },
+        "link": { "label": { "tr": "svm.py", "en": "svm.py" }, "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/svm.py", "kind": "file" }
+      },
+      {
+        "project": "face-detection-system",
+        "claim": { "tr": "Soyut detektör arayüzü (ABC)", "en": "Abstract detector interface (ABC)" },
+        "link": { "label": { "tr": "detector_base.py", "en": "detector_base.py" }, "url": "https://github.com/reycodeart/face_detection_system/blob/main/core/detector_base.py", "kind": "file" }
+      },
+      {
+        "project": "rl-multiagent-cartpole",
+        "claim": { "tr": "DQN eğitim döngüsü", "en": "DQN training loop" },
+        "link": { "label": { "tr": "single_agent_dqn.py", "en": "single_agent_dqn.py" }, "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/single_agent_dqn.py", "kind": "file" }
+      }
+    ]
+  },
+  {
+    "id": "ml",
+    "label": { "tr": "Makine Öğrenmesi", "en": "Machine Learning" },
+    "items": [
+      {
+        "project": "keystroke-dynamics",
+        "claim": { "tr": "Beş detektörün EER karşılaştırması (ikisi denetimde yeniden üretildi)", "en": "EER comparison of five detectors (two reproduced in audit)" },
+        "link": { "label": { "tr": "results.csv", "en": "results.csv" }, "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/results.csv", "kind": "data" }
+      },
+      {
+        "project": "tls-c2-detection",
+        "claim": { "tr": "Sızıntıya karşı grup bazlı çapraz doğrulama", "en": "Group-aware cross-validation against leakage" },
+        "link": { "label": { "tr": "splitting.py", "en": "splitting.py" }, "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/src/tls_c2_detector/datasets/splitting.py", "kind": "file", "private": true }
+      },
+      {
+        "project": "face-detection-system",
+        "claim": { "tr": "Klasik ve DNN tabanlı tespitin hız karşılaştırması", "en": "Speed comparison of classic vs DNN detection" },
+        "link": { "label": { "tr": "summary.txt", "en": "summary.txt" }, "url": "https://github.com/reycodeart/face_detection_system/blob/main/results/summary.txt", "kind": "data" }
+      }
+    ]
+  },
+  {
+    "id": "agents",
+    "label": { "tr": "Agent Geliştirme", "en": "Agent Development" },
+    "items": [
+      {
+        "project": "rl-multiagent-cartpole",
+        "claim": { "tr": "İki bağımsız RL agent'ının paralel eğitimi", "en": "Parallel training of two independent RL agents" },
+        "link": { "label": { "tr": "multi_agent_dqn.py", "en": "multi_agent_dqn.py" }, "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/multi_agent_dqn.py", "kind": "file" }
+      },
+      {
+        "project": "cursed-couriers",
+        "claim": { "tr": "Bir LLM kodlama ajanını kurallar dosyasıyla yönlendirme", "en": "Steering an LLM coding agent with a rules file" },
+        "link": { "label": { "tr": "CLAUDE.md", "en": "CLAUDE.md" }, "url": "https://github.com/reycodeart/cursed-couriers/blob/main/CLAUDE.md", "kind": "doc", "private": true }
+      },
+      {
+        "project": "cursed-couriers",
+        "claim": { "tr": "Ajan çıktısını CI kapısıyla doğrulama", "en": "Validating agent output behind a CI gate" },
+        "link": { "label": { "tr": "PR #35 CI", "en": "PR #35 CI" }, "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38667898519", "kind": "ci", "private": true }
+      }
+    ]
+  },
+  {
+    "id": "testing",
+    "label": { "tr": "Test ve Doğrulama", "en": "Testing & Validation" },
+    "items": [
+      {
+        "project": "cursed-couriers",
+        "claim": { "tr": "Kararsız testin kök neden analizi (5/22 → 30/30)", "en": "Root-causing a flaky test (5/22 → 30/30)" },
+        "link": { "label": { "tr": "PR #1", "en": "PR #1" }, "url": "https://github.com/reycodeart/cursed-couriers/pull/1", "kind": "pr", "private": true }
+      },
+      {
+        "project": "cursed-couriers",
+        "claim": { "tr": "CI'ın yakaladığı hata ve düzeltmesi", "en": "A failure caught by CI and its fix" },
+        "link": { "label": { "tr": "PR #34 CI (kırmızı)", "en": "PR #34 CI (red)" }, "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38658737911", "kind": "ci", "private": true }
+      },
+      {
+        "project": "face-detection-system",
+        "claim": { "tr": "20 pytest testi (denetimde 20/20, OpenCV 4.10)", "en": "20 pytest tests (20/20 in audit, OpenCV 4.10)" },
+        "link": { "label": { "tr": "tests/", "en": "tests/" }, "url": "https://github.com/reycodeart/face_detection_system/tree/main/tests", "kind": "test" }
+      },
+      {
+        "project": "tls-c2-detection",
+        "claim": { "tr": "ruff + black + mypy + pytest CI matrisi", "en": "ruff + black + mypy + pytest CI matrix" },
+        "link": { "label": { "tr": "ci.yml", "en": "ci.yml" }, "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/.github/workflows/ci.yml", "kind": "ci", "private": true }
+      }
+    ]
+  },
+  {
+    "id": "security",
+    "label": { "tr": "Siber Güvenlik", "en": "Cybersecurity" },
+    "items": [
+      {
+        "project": "tls-c2-detection",
+        "claim": { "tr": "Şifreli trafikte C2 tespiti için savunma amaçlı araştırma tasarımı", "en": "Defensive research design for C2 detection in encrypted traffic" },
+        "link": { "label": { "tr": "DESIGN.md", "en": "DESIGN.md" }, "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/docs/DESIGN.md", "kind": "doc", "private": true }
+      },
+      {
+        "project": "keystroke-dynamics",
+        "claim": { "tr": "Davranışsal biyometri ile kimlik doğrulama", "en": "Authentication with behavioural biometrics" },
+        "link": { "label": { "tr": "mahalanobis_detector.py", "en": "mahalanobis_detector.py" }, "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/mahalanobis_detector.py", "kind": "file" }
+      },
+      {
+        "project": "cerberion",
+        "claim": { "tr": "AD'de dolaylı yönetici üyeliklerini bulma", "en": "Finding indirect admin memberships in AD" },
+        "link": { "label": { "tr": "security_analyzer.py", "en": "security_analyzer.py" }, "url": "https://github.com/reycodeart/cerberion/blob/main/backend/app/analysis/security_analyzer.py", "kind": "file", "private": true }
+      }
+    ]
+  },
+  {
+    "id": "data",
+    "label": { "tr": "Veri İşleme", "en": "Data Processing" },
+    "items": [
+      {
+        "project": "tls-c2-detection",
+        "claim": { "tr": "PCAP → akış → 43 özellik hattı", "en": "PCAP → flow → 43-feature pipeline" },
+        "link": { "label": { "tr": "FEATURES.md", "en": "FEATURES.md" }, "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/docs/FEATURES.md", "kind": "doc", "private": true }
+      },
+      {
+        "project": "keystroke-dynamics",
+        "claim": { "tr": "20.400 satırlık verinin temizlenmesi", "en": "Cleaning a 20,400-row dataset" },
+        "link": { "label": { "tr": "cleaned_data.csv", "en": "cleaned_data.csv" }, "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/cleaned_data.csv", "kind": "data" }
+      }
+    ]
+  }
+]

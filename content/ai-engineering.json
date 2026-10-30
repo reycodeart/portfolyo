@@ -1,0 +1,299 @@
+{
+  "intro": {
+    "tr": "Bu bölüm üç ayrı listeden oluşuyor: kanıtıyla yaptığım işler, agent geliştirmeye aktarılabilecek mühendislik becerileri ve hâlâ öğrenmekte olduğum alanlar. Listeleri bilinçli olarak karıştırmadım.",
+    "en": "This section has three separate lists: work I have done with evidence, engineering skills that transfer to agent development, and areas I am still learning. I kept the lists deliberately apart."
+  },
+  "agentDistinction": {
+    "title": {
+      "tr": "İki farklı 'agent'",
+      "en": "Two different kinds of 'agent'"
+    },
+    "rl": {
+      "tr": "RL agent (CartPole projesi): Bir ortamda eylem seçen ve ödül sinyaliyle bir Q-fonksiyonu öğrenen küçük bir sinir ağı. Dil anlamaz, araç çağırmaz; politika, binlerce deneme-yanılma adımıyla ağırlıklara gömülür.",
+      "en": "RL agent (CartPole project): a small neural network that chooses actions in an environment and learns a Q-function from a reward signal. It doesn't understand language or call tools; the policy is baked into weights through thousands of trial-and-error steps."
+    },
+    "llm": {
+      "tr": "LLM workflow agent (Claude Code ile çalışma deneyimim): Önceden eğitilmiş bir dil modeli, talimat ve bağlamla yönlendirilir; dosya okur, komut çalıştırır, kod yazar. Davranışı ağırlık güncellemesiyle değil; prompt, araç tanımları, kurallar dosyası ve doğrulama adımlarıyla şekillenir.",
+      "en": "LLM workflow agent (my experience working with Claude Code): a pre-trained language model steered by instructions and context; it reads files, runs commands and writes code. Its behaviour is shaped not by weight updates but by prompts, tool definitions, a rules file and validation steps."
+    },
+    "takeaway": {
+      "tr": "İkisinde ortak olan mühendislik problemi: agent'ın çıktısını güvenilir şekilde ölçmek. RL'de bu ödül eğrisi, LLM agent'ta testler, CI ve insan incelemesi.",
+      "en": "The shared engineering problem: measuring the agent's output reliably. In RL that is the reward curve; with an LLM agent it is tests, CI and human review."
+    }
+  },
+  "demonstrated": [
+    {
+      "title": {
+        "tr": "Pekiştirmeli öğrenme agent deneyleri",
+        "en": "Reinforcement learning agent experiments"
+      },
+      "detail": {
+        "tr": "PyTorch ile tek ve çoklu (bağımsız) DQN agent eğitimi, ε-greedy keşif, ödül takibi.",
+        "en": "Single and multi (independent) DQN agent training in PyTorch, ε-greedy exploration, reward tracking."
+      },
+      "projects": [
+        "rl-multiagent-cartpole"
+      ]
+    },
+    {
+      "title": {
+        "tr": "AI destekli kodlama",
+        "en": "AI-assisted coding"
+      },
+      "detail": {
+        "tr": "Claude Code ile 35 PR'lık bir oyun projesi ve bir araştırma kod tabanı; Cursor Agent ile bir arayüz projesi.",
+        "en": "A 35-PR game project and a research codebase with Claude Code; a UI project with Cursor Agent."
+      },
+      "projects": [
+        "cursed-couriers",
+        "tls-c2-detection",
+        "responsive-mobil-magaza"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Python ile otomasyon ve veri işleme",
+        "en": "Python automation and data processing"
+      },
+      "detail": {
+        "tr": "PCAP → akış → özellik hattı; 20.400 satırlık tuş vuruşu verisinin temizlenmesi ve kullanıcı bazlı bölünmesi.",
+        "en": "PCAP → flow → feature pipeline; cleaning and per-user splitting of a 20,400-row keystroke dataset."
+      },
+      "projects": [
+        "tls-c2-detection",
+        "keystroke-dynamics"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Model geliştirme ve değerlendirme",
+        "en": "Model development and evaluation"
+      },
+      "detail": {
+        "tr": "Beş anomali detektörünün EER ile karşılaştırılması; sızıntıya karşı grup bazlı çapraz doğrulama.",
+        "en": "Comparing five anomaly detectors by EER; group-aware cross-validation against leakage."
+      },
+      "projects": [
+        "keystroke-dynamics",
+        "tls-c2-detection",
+        "face-detection-system"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Git tabanlı geliştirme akışı",
+        "en": "Git-based development workflow"
+      },
+      "detail": {
+        "tr": "Feature branch → PR → CI → inceleme → birleştirme; kilometre taşı başına bir PR.",
+        "en": "Feature branch → PR → CI → review → merge; one PR per milestone."
+      },
+      "projects": [
+        "cursed-couriers"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Otomatik test ve doğrulama",
+        "en": "Automated testing and validation"
+      },
+      "detail": {
+        "tr": "Headless Godot testleri ve CI kapısı; pytest, ruff, black ve mypy içeren CI.",
+        "en": "Headless Godot tests behind a CI gate; CI with pytest, ruff, black and mypy."
+      },
+      "projects": [
+        "cursed-couriers",
+        "tls-c2-detection",
+        "face-detection-system"
+      ]
+    },
+    {
+      "title": {
+        "tr": "API entegrasyonu temelleri",
+        "en": "API integration foundations"
+      },
+      "detail": {
+        "tr": "FastAPI uç noktaları, LDAP (ldap3) ve Neo4j sürücüsü; React istemcisinden axios ile çağrı.",
+        "en": "FastAPI endpoints, LDAP (ldap3) and the Neo4j driver; calls from a React client with axios."
+      },
+      "projects": [
+        "cerberion"
+      ]
+    }
+  ],
+  "transferable": [
+    {
+      "title": {
+        "tr": "Araç entegrasyonu",
+        "en": "Tool integration"
+      },
+      "detail": {
+        "tr": "Zeek varsa Zeek, yoksa Scapy: dış bir aracı algılayıp güvenli şekilde geri düşen bir hat. Agent araç çağrılarında aynı desen gerekir.",
+        "en": "Zeek when available, otherwise Scapy: a pipeline that detects an external tool and falls back safely. Agent tool calls need the same pattern."
+      },
+      "projects": [
+        "tls-c2-detection"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Yapılandırılmış veri işleme",
+        "en": "Structured data processing"
+      },
+      "detail": {
+        "tr": "Şema doğrulama, kaynak (provenance) kaydı ve açık hata mesajları.",
+        "en": "Schema validation, provenance records and explicit error messages."
+      },
+      "projects": [
+        "tls-c2-detection"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Durum ve iş akışı yönetimi",
+        "en": "State and workflow management"
+      },
+      "detail": {
+        "tr": "Tohumlu, deterministik görev durumu; host-otoriter ağ durumu ve geç katılan oyuncuya durum aktarımı.",
+        "en": "Seeded, deterministic mission state; host-authoritative network state and state hand-off to late joiners."
+      },
+      "projects": [
+        "cursed-couriers"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Hata yönetimi",
+        "en": "Error handling"
+      },
+      "detail": {
+        "tr": "Geçersiz yapılandırmada sessiz varsayılan yerine ConfigError; geçersiz kareye ValueError.",
+        "en": "ConfigError instead of silent defaults on invalid config; ValueError on invalid frames."
+      },
+      "projects": [
+        "tls-c2-detection",
+        "face-detection-system"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Çıktı doğrulama",
+        "en": "Output validation"
+      },
+      "detail": {
+        "tr": "AI'ın 'testler geçti' iddiasını CI loguyla karşılaştırmak; CLAUDE.md'de 'testler çalışmadıysa geçti deme' kuralı.",
+        "en": "Checking an AI's 'tests passed' claim against the CI log; the CLAUDE.md rule 'never claim tests passed unless they ran'."
+      },
+      "projects": [
+        "cursed-couriers"
+      ]
+    },
+    {
+      "title": {
+        "tr": "Loglama ve gözlemlenebilirlik",
+        "en": "Logging and observability"
+      },
+      "detail": {
+        "tr": "Çalıştırma başına log dosyası, yapılandırma özeti ve ortam anlık görüntüsü.",
+        "en": "Per-run log files, config hashes and environment snapshots."
+      },
+      "projects": [
+        "tls-c2-detection"
+      ]
+    },
+    {
+      "title": {
+        "tr": "İnsan inceleme akışları",
+        "en": "Human review workflows"
+      },
+      "detail": {
+        "tr": "AI kodu birleşmeden önce manuel Windows oyun testi; C2 tahminini 'analist incelemesi gerektirir' olarak çerçevelemek.",
+        "en": "Manual Windows playtest before AI code merges; framing a C2 prediction as 'needs analyst review'."
+      },
+      "projects": [
+        "cursed-couriers",
+        "tls-c2-detection"
+      ]
+    }
+  ],
+  "developing": [
+    {
+      "title": {
+        "tr": "LLM tool calling",
+        "en": "LLM tool calling"
+      },
+      "detail": {
+        "tr": "Araçları kullanan bir agent ile çalıştım, ancak tool calling API'si üzerinden kendi agent'ımı henüz yazmadım.",
+        "en": "I have worked with an agent that uses tools, but I haven't yet written my own agent on a tool-calling API."
+      }
+    },
+    {
+      "title": {
+        "tr": "Agent orkestrasyonu",
+        "en": "Agent orchestration"
+      },
+      "detail": {
+        "tr": "Öğrenmekte olduğum konu; yayımlanmış bir projem yok.",
+        "en": "A topic I'm learning; no published project yet."
+      }
+    },
+    {
+      "title": {
+        "tr": "RAG mimarileri",
+        "en": "RAG architectures"
+      },
+      "detail": {
+        "tr": "Öğrenmekte olduğum konu; yayımlanmış bir projem yok.",
+        "en": "A topic I'm learning; no published project yet."
+      }
+    },
+    {
+      "title": {
+        "tr": "Agent değerlendirmesi (evaluation)",
+        "en": "Agent evaluation"
+      },
+      "detail": {
+        "tr": "Test ve CI ile AI çıktısını doğrulama deneyimim var; sistematik LLM eval setleri kurmayı öğreniyorum.",
+        "en": "I have validated AI output with tests and CI; I'm learning to build systematic LLM eval sets."
+      }
+    },
+    {
+      "title": {
+        "tr": "Guardrail'ler",
+        "en": "Guardrails"
+      },
+      "detail": {
+        "tr": "CLAUDE.md kuralları gibi süreç düzeyinde sınırlar koydum; programatik guardrail uygulamasını öğreniyorum.",
+        "en": "I have set process-level limits such as CLAUDE.md rules; I'm learning programmatic guardrail implementation."
+      }
+    },
+    {
+      "title": {
+        "tr": "Çoklu agent iş akışları",
+        "en": "Multi-agent workflows"
+      },
+      "detail": {
+        "tr": "Bağımsız RL agent'larıyla deney yaptım; LLM tabanlı çoklu agent iş akışları öğrenme hedefim.",
+        "en": "I experimented with independent RL agents; LLM-based multi-agent workflows are a learning goal."
+      }
+    }
+  ],
+  "contributionAreas": [
+    {
+      "tr": "Agent çıktıları için test, regresyon ve doğrulama süreçleri kurmak",
+      "en": "Building test, regression and validation processes for agent output"
+    },
+    {
+      "tr": "Python ile veri hazırlama, araç entegrasyonu ve otomasyon",
+      "en": "Python data preparation, tool integration and automation"
+    },
+    {
+      "tr": "Güvenlik bakış açısı: log analizi, şüpheli davranışın değerlendirilmesi, yetki ilişkileri",
+      "en": "A security perspective: log analysis, assessing suspicious behaviour, privilege relationships"
+    },
+    {
+      "tr": "Kanıta dayalı dokümantasyon ve sınırlamaların açıkça yazılması",
+      "en": "Evidence-based documentation that states limitations plainly"
+    }
+  ]
+}

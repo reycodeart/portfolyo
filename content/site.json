@@ -1,0 +1,75 @@
+{
+  "name": "Reyhan Keskin",
+  "headline": "Software Engineering | AI & Machine Learning | Cybersecurity",
+  "tagline": {
+    "tr": "Bilişim Sistemleri Mühendisliği, 2026 mezunu",
+    "en": "Information Systems Engineering, Class of 2026"
+  },
+  "intro": {
+    "tr": "Python ile makine öğrenmesi deneyleri, şifreli ağ trafiği üzerine devam eden bir TÜBİTAK 2209-A araştırması ve Claude Code ile test odaklı yürüttüğüm bir oyun projesi geliştirdim. Bu sitedeki iddialar bir GitHub dosyasına, PR'a, CI kaydına veya portföy denetiminde yeniden çalıştırılan bir sonuca bağlı.",
+    "en": "I have built Python machine learning experiments, an ongoing TÜBİTAK 2209-A research project on encrypted network traffic, and a game developed with Claude Code under a test-first workflow. Claims on this site link to a GitHub file, PR, CI log or a result re-run during the portfolio audit."
+  },
+  "statement": {
+    "tr": "Yapay zekâ araçlarını yalnızca kullanmıyorum; yazılım geliştirmeyi anlıyor, teknik sistemler kuruyor ve yapay zekâ ile üretilen çıktıları test ve mühendislik pratikleriyle değerlendiriyorum.",
+    "en": "I don't just use AI tools. I understand software development, build technical systems, and evaluate AI-assisted outputs through testing and engineering practices."
+  },
+  "statementNote": {
+    "tr": "Kapsam: Yeni mezun bir mühendisim. Kurumsal ölçekte bir LLM agent ürünü geliştirmedim; aşağıdaki kanıtlar neyi yaptığımı ve neyi öğrenmekte olduğumu ayrı ayrı gösteriyor.",
+    "en": "Scope: I am a new graduate engineer. I have not shipped an enterprise LLM agent product; the evidence below separates what I have done from what I am still learning."
+  },
+  "location": {
+    "tr": "Türkiye",
+    "en": "Türkiye"
+  },
+  "education": {
+    "school": {
+      "tr": "Muğla Sıtkı Koçman Üniversitesi",
+      "en": "Muğla Sıtkı Koçman University"
+    },
+    "degree": {
+      "tr": "Bilişim Sistemleri Mühendisliği (Lisans)",
+      "en": "B.Sc. Information Systems Engineering"
+    },
+    "graduation": "2026"
+  },
+  "links": {
+    "github": "https://github.com/reycodeart",
+    "linkedin": "https://www.linkedin.com/in/reynkes/"
+  },
+  "cvPath": null,
+  "interests": [
+    {
+      "tr": "Yazılım Mühendisliği",
+      "en": "Software Engineering"
+    },
+    {
+      "tr": "Yapay Zekâ ve Makine Öğrenmesi",
+      "en": "Artificial Intelligence & Machine Learning"
+    },
+    {
+      "tr": "Yapay Zekâ Destekli Geliştirme",
+      "en": "AI-Assisted Development"
+    },
+    {
+      "tr": "Pekiştirmeli Öğrenme",
+      "en": "Reinforcement Learning"
+    },
+    {
+      "tr": "Siber Güvenlik ve Güvenlik İzleme",
+      "en": "Cybersecurity & Security Monitoring"
+    },
+    {
+      "tr": "Veri Analizi",
+      "en": "Data Analysis"
+    },
+    {
+      "tr": "Test ve Doğrulama",
+      "en": "Testing & Validation"
+    },
+    {
+      "tr": "Agent Odaklı Yazılım Geliştirme",
+      "en": "Agent-Oriented Software Development"
+    }
+  ],
+  "auditDate": "2026-10-30"
+}

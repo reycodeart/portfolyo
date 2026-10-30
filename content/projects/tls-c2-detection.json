@@ -1,0 +1,238 @@
+{
+  "slug": "tls-c2-detection",
+  "order": 1,
+  "featured": true,
+  "title": "TLS 1.3 C2 Detection",
+  "subtitle": {
+    "tr": "Şifreli trafikte, içerik çözülmeden akış meta verisiyle C2 tespiti",
+    "en": "Detecting C2 in encrypted traffic from flow metadata, without decryption"
+  },
+  "status": "ongoing",
+  "statusNote": {
+    "tr": "Ongoing Research — TÜBİTAK 2209-A. README'ye göre 14 aşamanın 11'i tamamlandı; gerçek araştırma verisiyle model performansı henüz kanıtlanmadı.",
+    "en": "Ongoing Research — TÜBİTAK 2209-A. Per the README, 11 of 14 phases are complete; model performance on real research data is not yet established."
+  },
+  "visibility": "private",
+  "repoUrl": "https://github.com/reycodeart/tls-c2-detection",
+  "period": "2026 –",
+  "summary": {
+    "tr": "PCAP doğrulama, Zeek/Scapy ile akış çıkarma, 43 akış özelliği, grup bazlı çapraz doğrulama ve Baseline / Random Forest / CNN / LSTM deney altyapısı içeren savunma amaçlı bir araştırma yazılımı.",
+    "en": "Defensive research software with PCAP validation, Zeek/Scapy flow extraction, 43 flow features, group-aware cross-validation and Baseline / Random Forest / CNN / LSTM experiment infrastructure."
+  },
+  "tags": [
+    "Python",
+    "Scapy",
+    "Zeek",
+    "scikit-learn",
+    "TensorFlow",
+    "pytest",
+    "mypy",
+    "GitHub Actions"
+  ],
+  "categories": [
+    "ai-ml",
+    "security",
+    "data",
+    "testing"
+  ],
+  "authorship": {
+    "mode": "ai-assisted",
+    "note": {
+      "tr": "Araştırma sorusu, kapsam ve etik sınırlar bana ait; uygulama Claude Code desteğiyle yazıldı (commit'lerde Claude co-author kaydı var). Her aşamayı testler ve yazılı protokollerle kontrol ediyorum.",
+      "en": "The research question, scope and ethical boundaries are mine; the implementation was written with Claude Code assistance (commits carry a Claude co-author trailer). I check each phase against tests and written protocols."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "C2 trafiğinin büyük kısmı artık TLS içinde ve TLS 1.3, el sıkışmanın da önemli kısmını şifreliyor. Payload incelemesi mümkün değil. Araştırma sorusu: Paket boyutu, zamanlama, yön ve hacim gibi davranışsal akış özellikleri, şifre çözmeden kötü amaçlı C2 iletişimini meşru trafikten ayırmaya yeter mi?",
+      "en": "Most C2 traffic now runs inside TLS, and TLS 1.3 encrypts much of the handshake too, so payload inspection is not possible. Research question: are behavioural flow properties (packet sizes, timing, direction, volume) enough to separate malicious C2 from legitimate traffic without decrypting anything?"
+    },
+    "approach": [
+      {
+        "tr": "Yalnızca daha önce kaydedilmiş PCAP'ler, halka açık veri setleri ve sentetik veri analiz ediliyor; şifre çözme, zararlı yazılım çalıştırma veya C2 sunucusu yok.",
+        "en": "Only previously captured PCAPs, public datasets and synthetic data are analysed; no decryption, no malware execution, no C2 servers."
+      },
+      {
+        "tr": "Sızıntı önleme tasarımın merkezinde: aynı yakalamadan gelen akışlar hiçbir zaman hem eğitim hem test katmanında olmuyor; IP, port ve zaman damgaları model girdisi değil.",
+        "en": "Leakage prevention is central: flows from one capture never appear in both training and test folds; IPs, ports and timestamps are metadata, never model inputs."
+      },
+      {
+        "tr": "Ön işleme (imputation, ölçekleme, seçim) yalnızca eğitim katmanlarında fit ediliyor; veri yetersizse çalıştırma sessizce devam etmek yerine nedenini söyleyip duruyor.",
+        "en": "Preprocessing (imputation, scaling, selection) is fitted on training folds only; if the data cannot support the configured folds, the run stops and says why instead of silently continuing."
+      }
+    ],
+    "architecture": {
+      "diagram": "tls-pipeline",
+      "text": {
+        "tr": "PCAP doğrulamasından sonra Zeek varsa Zeek, yoksa Python/Scapy ile çıkarım yapılıyor. Tablo özellikleri Baseline ve Random Forest'a, sıralı paket dizileri CNN ve LSTM'e gidiyor; hepsi aynı grup bazlı katmanlarda değerlendiriliyor. Diyagramdaki her adıma tıklayarak açıklamasını görebilirsiniz.",
+        "en": "After PCAP validation, extraction runs through Zeek when available, otherwise Python/Scapy. Tabular features feed the baselines and Random Forest, ordered packet sequences feed the CNN and LSTM, and all are evaluated on the same group-aware folds. Click any step in the diagram for details."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "Paket yapısı: ingestion (PCAP okuma, çift yönlü akış oluşturma, TLS ayrıştırma), features (43 özellik), datasets (etiket kaynağı, grup katmanları), preprocessing, models, evaluation.",
+        "en": "Package layout: ingestion (PCAP reading, bidirectional flow building, TLS parsing), features (43 features), datasets (label provenance, grouped folds), preprocessing, models, evaluation."
+      },
+      {
+        "tr": "Tüm ayarlar tek bir YAML yapılandırmasında; bilinmeyen anahtar veya geçersiz değer açık bir ConfigError fırlatıyor ve her yapılandırmanın SHA-256 özeti sonuçlarla birlikte kaydediliyor.",
+        "en": "All settings live in one YAML config; unknown keys or invalid values raise a clear ConfigError, and each configuration's SHA-256 hash is recorded with results."
+      },
+      {
+        "tr": "Tekrarlanabilirlik: tek tohum (seed), işletim sistemi, paket sürümleri, git commit'i ve veri dosyası özetleri her çalıştırmada kaydediliyor.",
+        "en": "Reproducibility: a single seed, OS, package versions, git commit and dataset file hashes are recorded for every run."
+      },
+      {
+        "tr": "CNN aggregate tablo kolonları yerine sıralı paket dizileri üzerinde çalışacak şekilde tasarlandı, çünkü konvolüsyon anlamlı bir sıralama gerektiriyor.",
+        "en": "The CNN is designed to run on ordered packet sequences rather than aggregate tabular columns, because convolution needs a meaningful ordering."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Araştırma sorusunu, hipotezi ve savunma amaçlı etik kapsamı tanımladım.",
+        "en": "Defined the research question, the hypothesis and the defensive ethical scope."
+      },
+      {
+        "tr": "Aşamalı yol haritasını ve sızıntı önleme ilkelerini belirledim; her aşamayı test sonuçları ve dokümanlarla gözden geçiriyorum.",
+        "en": "Set the phased roadmap and the leakage-prevention principles; I review each phase against test results and documentation."
+      },
+      {
+        "tr": "Kod Claude Code desteğiyle üretildi. Hangi satırı kimin yazdığını iddia etmiyorum; benim işim gereksinim, doğrulama ve karar.",
+        "en": "The code was produced with Claude Code. I don't claim line-by-line authorship; my part is requirements, validation and decisions."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "CI (GitHub Actions, Python 3.11 ve 3.12): ruff, black --check, mypy ve pytest.",
+        "en": "CI (GitHub Actions, Python 3.11 and 3.12): ruff, black --check, mypy and pytest."
+      },
+      {
+        "tr": "Portföy denetiminde (30.10.2026) testler bir Linux konteynerinde TensorFlow olmadan yeniden çalıştırıldı: 573 geçti, 11 atlandı (TensorFlow veya yerel veri yok), 2 başarısız.",
+        "en": "In the portfolio audit (2026-10-30) the tests were re-run in a Linux container without TensorFlow: 573 passed, 11 skipped (no TensorFlow or local data), 2 failed."
+      },
+      {
+        "tr": "İki başarısız test ortama bağlı: biri Windows'a özgü bir veri yolu (R:) varsayıyor, diğeri dumpcap ağ arayüzü gerektiriyor. İkisi de düzeltilmesi gereken açık iş.",
+        "en": "Both failures are environment-specific: one assumes a Windows data path (R:), the other needs a dumpcap network interface. Both are open work to fix."
+      },
+      {
+        "tr": "Yazılım kontrolleri sentetik demo verisiyle yapılıyor; bu skorlar araştırma sonucu değildir.",
+        "en": "Software checks use a synthetic demo dataset; those scores are not research results."
+      }
+    ],
+    "results": {
+      "items": [
+        {
+          "label": {
+            "tr": "Tamamlanan aşamalar (README)",
+            "en": "Phases complete (README)"
+          },
+          "value": "11 / 14",
+          "verification": "self-reported"
+        },
+        {
+          "label": {
+            "tr": "Akış özelliği",
+            "en": "Flow features"
+          },
+          "value": "43",
+          "verification": "repo-file"
+        },
+        {
+          "label": {
+            "tr": "Denetimde test sonucu",
+            "en": "Tests in audit re-run"
+          },
+          "value": "573 passed · 2 failed · 11 skipped",
+          "verification": "reproduced"
+        }
+      ],
+      "tables": [],
+      "note": {
+        "tr": "Gerçek araştırma verisine dayalı model performansı yok. Bu yüzden bu sayfada doğruluk, F1 veya ROC grafiği bulunmuyor.",
+        "en": "No model performance on real research data yet, so there is no accuracy, F1 or ROC chart on this page."
+      }
+    },
+    "limitations": [
+      {
+        "tr": "Gerçek araştırma verisi henüz elde edilmedi; model performansı kanıtlanmadı.",
+        "en": "Real research data has not been acquired yet; model performance is not established."
+      },
+      {
+        "tr": "TLS 1.3, TLS 1.2'ye göre çok daha az el sıkışma meta verisi gösteriyor.",
+        "en": "TLS 1.3 exposes much less handshake metadata than TLS 1.2."
+      },
+      {
+        "tr": "Yakalama düzeyinde etiketler etiket gürültüsü getirebilir; akış başına özellikler beaconing gibi akışlar arası örüntüleri yalnızca kısmen yakalıyor.",
+        "en": "Capture-level labels can introduce label noise; per-flow features only partly capture inter-flow patterns such as beaconing."
+      },
+      {
+        "tr": "Bir tahmin, 'analist incelemesi gerektiren C2 benzeri davranış' anlamına gelir; ele geçirilme kanıtı değildir.",
+        "en": "A prediction means 'C2-like behaviour that needs analyst review', not proof of compromise."
+      }
+    ],
+    "evidence": [
+      {
+        "label": {
+          "tr": "README ve yol haritası",
+          "en": "README and roadmap"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/README.md",
+        "kind": "doc",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "Tasarım ve metodolojik riskler",
+          "en": "Design and methodological risks"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/docs/DESIGN.md",
+        "kind": "doc",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "43 özelliğin tanımı",
+          "en": "Definition of the 43 features"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/docs/FEATURES.md",
+        "kind": "doc",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "Grup bazlı katman ataması",
+          "en": "Group-aware fold assignment"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/src/tls_c2_detector/datasets/splitting.py",
+        "kind": "file",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "Grup bölme testleri",
+          "en": "Group splitting tests"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/tests/test_group_splitting.py",
+        "kind": "test",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "CI iş akışı",
+          "en": "CI workflow"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/.github/workflows/ci.yml",
+        "kind": "ci",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "Veri edinme protokolü",
+          "en": "Data acquisition protocol"
+        },
+        "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/docs/DATA_ACQUISITION_PROTOCOL.md",
+        "kind": "doc",
+        "private": true
+      }
+    ]
+  }
+}

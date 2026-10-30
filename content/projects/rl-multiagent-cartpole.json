@@ -1,0 +1,120 @@
+{
+  "slug": "rl-multiagent-cartpole",
+  "order": 5,
+  "featured": true,
+  "title": "RL Multi-Agent CartPole",
+  "subtitle": {
+    "tr": "PyTorch ile tek ve çoklu DQN agent eğitimi",
+    "en": "Single- and multi-agent DQN training with PyTorch"
+  },
+  "status": "prototype",
+  "statusNote": {
+    "tr": "Öğrenme projesi. Basit DQN; replay buffer ve hedef ağı yok.",
+    "en": "Learning project. Minimal DQN; no replay buffer or target network."
+  },
+  "visibility": "public",
+  "repoUrl": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole",
+  "period": "2025",
+  "summary": {
+    "tr": "OpenAI Gym CartPole-v1 ortamında epsilon-greedy keşifli bir DQN agent'ı ve iki bağımsız (işbirliksiz) agent'ın paralel eğitimi; episode başına ödül takibi ve grafik çıktısı.",
+    "en": "An epsilon-greedy DQN agent on OpenAI Gym CartPole-v1 and two independent (non-cooperative) agents trained in parallel, with per-episode reward tracking and plots."
+  },
+  "tags": ["Python", "PyTorch", "OpenAI Gym", "DQN", "NumPy", "Matplotlib"],
+  "categories": ["ai-ml", "agents"],
+  "authorship": {
+    "mode": "own-code",
+    "note": {
+      "tr": "Kendi yazdığım küçük bir öğrenme projesi (~125 satır).",
+      "en": "A small learning project I wrote myself (~125 lines)."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "Pekiştirmeli öğrenmede bir agent, ortamla etkileşerek ödülü en üst düzeye çıkaran bir politika öğrenir. Amaç DQN'in temelini uygulamak ve tek agent ile birden çok agent kurulumu arasındaki farkı görmekti.",
+      "en": "In reinforcement learning an agent learns a policy that maximises reward by interacting with an environment. The goal was to implement the core of DQN and see the difference between single- and multi-agent setups."
+    },
+    "approach": [
+      {
+        "tr": "Q-ağı: 4 → 128 → 2 tam bağlı katman; hedef r + γ·max Q(s′) (γ = 0.99); MSE kaybı, Adam (lr = 0.001).",
+        "en": "Q-network: 4 → 128 → 2 fully connected layers; target r + γ·max Q(s′) (γ = 0.99); MSE loss, Adam (lr = 0.001)."
+      },
+      {
+        "tr": "Epsilon-greedy keşif: ε 1.0'dan 0.995 çarpanla 0.01'e azalıyor; 200 episode.",
+        "en": "Epsilon-greedy exploration: ε decays from 1.0 by ×0.995 to 0.01; 200 episodes."
+      },
+      {
+        "tr": "Çoklu agent: her agent'ın kendi ortamı, ağı ve optimizer'ı var; ortak bir ödül veya iletişim yok.",
+        "en": "Multi-agent: each agent has its own environment, network and optimiser; there is no shared reward or communication."
+      }
+    ],
+    "architecture": {
+      "diagram": "rl-loop",
+      "text": {
+        "tr": "Klasik RL döngüsü: durum → Q-ağı → eylem (ε-greedy) → ortam → ödül ve yeni durum → TD hedefi ile tek adımlık güncelleme.",
+        "en": "The classic RL loop: state → Q-network → action (ε-greedy) → environment → reward and next state → one-step update with the TD target."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "single_agent_dqn.py, multi_agent_dqn.py ve ödül grafiği için utils.py.",
+        "en": "single_agent_dqn.py, multi_agent_dqn.py and utils.py for reward plots."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Tüm kod, hiperparametre seçimi ve README.",
+        "en": "All code, hyperparameter choices and the README."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "Otomatik test yok. Doğrulama: eğitim sırasında episode ödüllerinin yazdırılması ve grafiği.",
+        "en": "No automated tests. Validation: printing and plotting episode rewards during training."
+      }
+    ],
+    "results": {
+      "items": [],
+      "tables": [],
+      "note": {
+        "tr": "Depoda kaydedilmiş bir ödül grafiği veya eğitim sonucu yok, bu yüzden burada performans sayısı gösterilmiyor.",
+        "en": "The repository contains no saved reward plot or training result, so no performance number is shown here."
+      }
+    },
+    "limitations": [
+      {
+        "tr": "Kod `from models.dqn_model import DQN` bekliyor ama ağ tanımı kökte 'models' adlı tek bir dosyaya yüklenmiş; depo olduğu gibi çalışmaz (dosya models/dqn_model.py'ye taşınmalı).",
+        "en": "The code expects `from models.dqn_model import DQN`, but the network definition was uploaded as a single root file named 'models'; the repo doesn't run as-is (the file needs to move to models/dqn_model.py)."
+      },
+      {
+        "tr": "Eski Gym API'si (reset() tek değer, step() 4 değer); güncel Gymnasium ile uyumlu değil. results/ klasörü yok.",
+        "en": "Uses the old Gym API (reset() returns one value, step() returns four); not compatible with current Gymnasium. No results/ folder."
+      },
+      {
+        "tr": "Replay buffer ve hedef ağı olmayan DQN kararsız öğrenebilir; bu, bir sonraki adım olarak not edildi.",
+        "en": "DQN without a replay buffer or target network can learn unstably; that's the noted next step."
+      }
+    ],
+    "evidence": [
+      {
+        "label": { "tr": "Tek agent DQN", "en": "Single-agent DQN" },
+        "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/single_agent_dqn.py",
+        "kind": "file"
+      },
+      {
+        "label": { "tr": "Çoklu agent DQN", "en": "Multi-agent DQN" },
+        "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/multi_agent_dqn.py",
+        "kind": "file"
+      },
+      {
+        "label": { "tr": "Q-ağı tanımı", "en": "Q-network definition" },
+        "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/models",
+        "kind": "file"
+      },
+      {
+        "label": { "tr": "README", "en": "README" },
+        "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/README.md",
+        "kind": "doc"
+      }
+    ]
+  }
+}

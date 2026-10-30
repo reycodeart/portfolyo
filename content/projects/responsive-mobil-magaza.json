@@ -1,0 +1,92 @@
+{
+  "slug": "responsive-mobil-magaza",
+  "order": 7,
+  "featured": false,
+  "title": "Responsive Mobil Mağaza",
+  "subtitle": {
+    "tr": "Cursor Agent ile geliştirilen mobil öncelikli e-ticaret arayüz prototipi",
+    "en": "Mobile-first e-commerce UI prototype built with Cursor Agent"
+  },
+  "status": "completed",
+  "visibility": "public",
+  "repoUrl": "https://github.com/reycodeart/Responsive-Mobil-Magaza",
+  "period": "2026",
+  "summary": {
+    "tr": "HTML5, Tailwind CSS ve Vanilla JavaScript ile istemci taraflı yönlendirme, sepet, filtreleme ve ödeme akışı olan tek sayfa uygulama. İkinci bir AI destekli geliştirme örneği.",
+    "en": "A single-page app with client-side routing, cart, filtering and checkout flow in HTML5, Tailwind CSS and Vanilla JavaScript. A second example of AI-assisted development."
+  },
+  "tags": ["JavaScript", "Tailwind CSS", "Vite", "ESLint", "Cursor Agent"],
+  "categories": ["software"],
+  "authorship": {
+    "mode": "ai-assisted",
+    "note": {
+      "tr": "18 commit'in 17'si 'Cursor Agent' tarafından yazıldı; gereksinimleri, sunum notlarını ve teslimi ben yönettim.",
+      "en": "17 of 18 commits were authored by 'Cursor Agent'; I managed the requirements, presentation notes and delivery."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "Ders kapsamında, framework kullanmadan hızlı ve erişilebilir bir mobil mağaza arayüzü geliştirmek.",
+      "en": "For a course: build a fast, accessible mobile store interface without a framework."
+    },
+    "approach": [
+      {
+        "tr": "Mobil öncelikli tasarım, sayfa yenilemesiz yönlendirme, LocalStorage ile kalıcı sepet ve favoriler.",
+        "en": "Mobile-first design, routing without page reloads, cart and favourites persisted in LocalStorage."
+      }
+    ],
+    "architecture": {
+      "text": {
+        "tr": "index.html + app.js (yönlendirme, durum, filtreleme) + styles.css; Vite ile derleme.",
+        "en": "index.html + app.js (routing, state, filtering) + styles.css; built with Vite."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "Ürün listeleme, detay, sepet, ödeme akışı ve filtreleme.",
+        "en": "Product listing, detail, cart, checkout flow and filtering."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Gereksinimler, AI ajanına yönlendirme, sunum notları ve teslim.",
+        "en": "Requirements, directing the AI agent, presentation notes and delivery."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "ESLint yapılandırılmış; otomatik test yok. README bir Lighthouse raporu özeti içeriyor (bu denetimde yeniden ölçülmedi).",
+        "en": "ESLint is configured; no automated tests. The README includes a Lighthouse report summary (not re-measured in this audit)."
+      }
+    ],
+    "results": {
+      "items": [
+        {
+          "label": { "tr": "Lighthouse Performance (README)", "en": "Lighthouse Performance (README)" },
+          "value": "94",
+          "verification": "self-reported",
+          "source": "https://github.com/reycodeart/Responsive-Mobil-Magaza/blob/main/README.md"
+        }
+      ],
+      "tables": []
+    },
+    "limitations": [
+      {
+        "tr": "Gerçek bir backend veya ödeme entegrasyonu yok; arayüz prototipi.",
+        "en": "No real backend or payment integration; it's a UI prototype."
+      }
+    ],
+    "evidence": [
+      {
+        "label": { "tr": "README ve Lighthouse özeti", "en": "README and Lighthouse summary" },
+        "url": "https://github.com/reycodeart/Responsive-Mobil-Magaza/blob/main/README.md",
+        "kind": "doc"
+      },
+      {
+        "label": { "tr": "Commit geçmişi", "en": "Commit history" },
+        "url": "https://github.com/reycodeart/Responsive-Mobil-Magaza/commits/main",
+        "kind": "commit"
+      }
+    ]
+  }
+}

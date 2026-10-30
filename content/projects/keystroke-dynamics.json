@@ -1,0 +1,215 @@
+{
+  "slug": "keystroke-dynamics",
+  "order": 3,
+  "featured": true,
+  "title": "Keystroke Dynamics",
+  "subtitle": {
+    "tr": "Tuş vuruşu davranışıyla kullanıcı doğrulama: anomali tespit algoritmalarının karşılaştırılması",
+    "en": "User verification from typing behaviour: comparing anomaly detection algorithms"
+  },
+  "status": "completed",
+  "visibility": "public",
+  "repoUrl": "https://github.com/reycodeart/muhendislikprojem",
+  "period": "2024 – 2025",
+  "summary": {
+    "tr": "CMU DSL-StrongPassword veri seti (51 kullanıcı) üzerinde One-Class SVM, K-Means, Mahalanobis ve iki sinir ağı detektörünü Equal Error Rate (EER) ile karşılaştıran mühendislik projesi.",
+    "en": "Engineering project comparing One-Class SVM, K-Means, Mahalanobis and two neural network detectors by Equal Error Rate (EER) on the CMU DSL-StrongPassword dataset (51 users)."
+  },
+  "tags": [
+    "Python",
+    "scikit-learn",
+    "pandas",
+    "NumPy",
+    "One-Class SVM",
+    "K-Means",
+    "Mahalanobis",
+    "Neural Networks"
+  ],
+  "categories": [
+    "ai-ml",
+    "security",
+    "data"
+  ],
+  "authorship": {
+    "mode": "own-code",
+    "note": {
+      "tr": "Bu projenin kodunu ve deneylerini kendim yazdım (Ocak 2025 yüklemesi, Türkçe yorumlu Python dosyaları).",
+      "en": "I wrote this project's code and experiments myself (January 2025 upload, Python files with Turkish comments)."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "Parola doğru girilse bile parolayı yazan kişi gerçek kullanıcı mı? Tuşa basılı tutma ve tuşlar arası geçiş süreleri kişiye özgü bir davranış izi oluşturur. Soru: Yalnızca gerçek kullanıcının örnekleriyle eğitilen bir anomali detektörü taklitçileri ne kadar iyi ayırır?",
+      "en": "Even when the password is correct, is the person typing it the real user? Hold times and key-to-key transition times form a personal behavioural trace. Question: how well does an anomaly detector trained only on the genuine user's samples separate impostors?"
+    },
+    "approach": [
+      {
+        "tr": "Her kullanıcı için ayrı model: ilk 200 örnek eğitim, kalan örnekler gerçek-kullanıcı testi; diğer kullanıcıların ilk 5–10 örneği taklitçi testi.",
+        "en": "One model per user: the first 200 samples for training, the rest as genuine test samples; the first 5–10 samples of every other user as impostor tests."
+      },
+      {
+        "tr": "Skorlardan ROC eğrisi çıkarılıp Equal Error Rate (yanlış kabul = yanlış ret noktası) hesaplanıyor; 51 kullanıcının ortalaması ve standart sapması raporlanıyor.",
+        "en": "Scores are turned into a ROC curve and the Equal Error Rate (where false accept = false reject) is computed; mean and standard deviation across the 51 users are reported."
+      }
+    ],
+    "architecture": {
+      "diagram": "keystroke",
+      "text": {
+        "tr": "Veri temizleme → kullanıcı başına eğitim/test bölmesi → detektör (SVM / K-Means / Mahalanobis / sinir ağı) → anomali skoru → ROC → EER. Ayrıca pynput tabanlı gerçek zamanlı bir tuş dinleyici denemesi var.",
+        "en": "Data cleaning → per-user train/test split → detector (SVM / K-Means / Mahalanobis / neural net) → anomaly score → ROC → EER. There is also a pynput-based real-time key listener experiment."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "One-Class SVM (RBF çekirdek, γ=0.1), eğitim ortalaması/standart sapmasıyla z-skor normalizasyonu.",
+        "en": "One-Class SVM (RBF kernel, γ=0.1) with z-score normalisation from the training mean/std."
+      },
+      {
+        "tr": "Mahalanobis detektörü: kovaryans matrisine küçük bir epsilon eklenerek tekillik hatası önleniyor.",
+        "en": "Mahalanobis detector: a small epsilon is added to the covariance matrix to avoid singularity."
+      },
+      {
+        "tr": "Öklid ve Manhattan mesafe detektörleri, K-Means ve iki sinir ağı (standart ve auto-associative) deneyleri.",
+        "en": "Euclidean and Manhattan distance detectors, K-Means and two neural network experiments (standard and auto-associative)."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Veri temizleme, tüm detektörlerin uygulanması, EER değerlendirmesi ve sonuç karşılaştırması.",
+        "en": "Data cleaning, implementing every detector, EER evaluation and comparing the results."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "Birim testi yok; doğrulama deney tekrarı ile yapıldı.",
+        "en": "No unit tests; validation was done by re-running the experiments."
+      },
+      {
+        "tr": "Portföy denetiminde (30.10.2026) SVM ve Mahalanobis betikleri temiz veriyle yeniden çalıştırıldı: sonuçlar results.csv ile 4 ondalık basamağa kadar aynı. K-Means 0.1537 verdi (kayıtlı 0.1502); tohum sabitlenmediği için küçük fark bekleniyor.",
+        "en": "In the portfolio audit (2026-10-30) the SVM and Mahalanobis scripts were re-run on the clean data: results match results.csv to 4 decimal places. K-Means gave 0.1537 (recorded 0.1502); a small difference is expected because no random seed is set."
+      }
+    ],
+    "results": {
+      "items": [],
+      "tables": [
+        {
+          "caption": {
+            "tr": "Ortalama EER (düşük daha iyi), 51 kullanıcı",
+            "en": "Mean EER (lower is better), 51 users"
+          },
+          "columns": [
+            {
+              "tr": "Model",
+              "en": "Model"
+            },
+            {
+              "tr": "Ortalama EER",
+              "en": "Mean EER"
+            },
+            {
+              "tr": "Std. sapma",
+              "en": "Std. dev."
+            },
+            {
+              "tr": "Denetimde yeniden üretildi",
+              "en": "Reproduced in audit"
+            }
+          ],
+          "rows": [
+            [
+              "One-Class SVM",
+              "0.1034",
+              "0.0659",
+              "✓ 0.1034"
+            ],
+            [
+              "Mahalanobis",
+              "0.1091",
+              "0.0645",
+              "✓ 0.1091"
+            ],
+            [
+              "Neural Net (standard)",
+              "0.1238",
+              "0.0819",
+              "—"
+            ],
+            [
+              "K-Means",
+              "0.1502",
+              "0.0909",
+              "≈ 0.1537 (no seed)"
+            ],
+            [
+              "Neural Net (auto-assoc.)",
+              "0.1868",
+              "0.0988",
+              "—"
+            ]
+          ],
+          "verification": "repo-file",
+          "note": {
+            "tr": "Değerler depodaki results.csv dosyasından. '—' olanlar bu denetimde yeniden çalıştırılmadı.",
+            "en": "Values come from results.csv in the repository. Rows marked '—' were not re-run in this audit."
+          }
+        }
+      ]
+    },
+    "limitations": [
+      {
+        "tr": "Detektörler arasında taklitçi örnek sayısı farklı (SVM 10, Mahalanobis 5); karşılaştırma tam olarak aynı protokolde değil.",
+        "en": "The number of impostor samples differs between detectors (SVM 10, Mahalanobis 5), so the comparison isn't on an identical protocol."
+      },
+      {
+        "tr": "Betikler data/ klasörü bekliyor ama CSV depo kökünde; ham CSV'de NaN satırlar var, temiz veri cleaned_data.csv'de.",
+        "en": "Scripts expect a data/ folder but the CSV is at the repo root; the raw CSV has NaN rows, the clean data is cleaned_data.csv."
+      },
+      {
+        "tr": "README, requirements dosyası ve rastgelelik için tohum yok.",
+        "en": "No README, no requirements file and no random seed."
+      }
+    ],
+    "evidence": [
+      {
+        "label": {
+          "tr": "Sonuç dosyası (results.csv)",
+          "en": "Results file (results.csv)"
+        },
+        "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/results.csv",
+        "kind": "data"
+      },
+      {
+        "label": {
+          "tr": "One-Class SVM detektörü",
+          "en": "One-Class SVM detector"
+        },
+        "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/svm.py",
+        "kind": "file"
+      },
+      {
+        "label": {
+          "tr": "Mahalanobis detektörü",
+          "en": "Mahalanobis detector"
+        },
+        "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/mahalanobis_detector.py",
+        "kind": "file"
+      },
+      {
+        "label": {
+          "tr": "K-Means detektörü",
+          "en": "K-Means detector"
+        },
+        "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/kmeans.py",
+        "kind": "file"
+      },
+      {
+        "label": {
+          "tr": "Öklid / Manhattan + gerçek zamanlı dinleyici",
+          "en": "Euclidean / Manhattan + real-time listener"
+        },
+        "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/keystroke_dynamics.py",
+        "kind": "file"
+      }
+    ]
+  }
+}

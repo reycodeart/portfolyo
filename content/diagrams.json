@@ -1,0 +1,418 @@
+{
+  "tls-pipeline": {
+    "title": { "tr": "Veri işleme mimarisi", "en": "Data processing architecture" },
+    "layers": [
+      [
+        {
+          "id": "pcap",
+          "title": { "tr": "PCAP dosyaları", "en": "PCAP files" },
+          "status": "done",
+          "detail": {
+            "tr": "Önceden kaydedilmiş trafik. Etiket dizinden (benign/malicious) veya bir metadata CSV'den gelir. Canlı yakalama veya zararlı yazılım çalıştırma yok.",
+            "en": "Previously captured traffic. Labels come from the directory (benign/malicious) or a metadata CSV. No live capture or malware execution."
+          }
+        }
+      ],
+      [
+        {
+          "id": "validate",
+          "title": { "tr": "PCAP doğrulama", "en": "PCAP validation" },
+          "status": "done",
+          "detail": {
+            "tr": "Dosya biçimi ve bütünlük kontrolleri; sorunlu dosyalar sessizce atlanmak yerine raporlanır.",
+            "en": "File format and integrity checks; problem files are reported rather than silently skipped."
+          }
+        }
+      ],
+      [
+        {
+          "id": "zeek",
+          "title": { "tr": "Zeek çıkarımı", "en": "Zeek extraction" },
+          "status": "done",
+          "detail": {
+            "tr": "Zeek PATH'te varsa TLS meta verisi Zeek ile çıkarılır. Zorunlu değildir.",
+            "en": "If Zeek is on PATH, TLS metadata is extracted with Zeek. It is optional."
+          }
+        },
+        {
+          "id": "scapy",
+          "title": { "tr": "Python / Scapy çıkarımı", "en": "Python / Scapy extraction" },
+          "status": "done",
+          "detail": {
+            "tr": "Zeek yoksa otomatik geri düşüş; çift yönlü akış oluşturma ve pasif TLS el sıkışma ayrıştırma.",
+            "en": "Automatic fallback when Zeek is missing; bidirectional flow building and passive TLS handshake parsing."
+          }
+        }
+      ],
+      [
+        {
+          "id": "features",
+          "title": { "tr": "Akış özellik mühendisliği", "en": "Flow feature engineering" },
+          "status": "done",
+          "detail": {
+            "tr": "Hacim, boyut, zamanlama ve yön kategorilerinde 43 özellik. IP, port ve mutlak zaman yalnızca meta veri olarak tutulur, model girdisi değildir.",
+            "en": "43 features across volume, size, timing and direction. IPs, ports and absolute timestamps are kept as metadata only, never as model inputs."
+          }
+        }
+      ],
+      [
+        {
+          "id": "tabular",
+          "title": { "tr": "Özellik veri seti + ön işleme", "en": "Feature dataset + preprocessing" },
+          "status": "done",
+          "detail": {
+            "tr": "Imputation, ölçekleme ve seçim yalnızca eğitim katmanında fit edilir (fold-safe).",
+            "en": "Imputation, scaling and selection are fitted on the training fold only (fold-safe)."
+          }
+        },
+        {
+          "id": "sequence",
+          "title": { "tr": "Paket dizisi veri seti", "en": "Packet sequence dataset" },
+          "status": "done",
+          "detail": {
+            "tr": "Sıralı paket boyutu / yön / zaman dizileri; CNN ve LSTM için maskeleme ile sabit uzunluk.",
+            "en": "Ordered packet size / direction / timing sequences; fixed length with masking for the CNN and LSTM."
+          }
+        }
+      ],
+      [
+        {
+          "id": "baselines",
+          "title": { "tr": "Baseline (Dummy / LogReg)", "en": "Baselines (Dummy / LogReg)" },
+          "status": "done",
+          "detail": {
+            "tr": "Daha karmaşık modellerin gerçekten bir şey öğrenip öğrenmediğini anlamak için alt sınır.",
+            "en": "A floor to tell whether more complex models actually learn something."
+          }
+        },
+        {
+          "id": "rf",
+          "title": { "tr": "Random Forest", "en": "Random Forest" },
+          "status": "done",
+          "detail": {
+            "tr": "Tablo özellikleri üzerinde ana klasik model.",
+            "en": "The main classical model on tabular features."
+          }
+        },
+        {
+          "id": "cnn",
+          "title": { "tr": "1D CNN", "en": "1D CNN" },
+          "status": "done",
+          "detail": {
+            "tr": "Paket dizileri üzerinde maskeli 1D konvolüsyon.",
+            "en": "Masked 1D convolution over packet sequences."
+          }
+        },
+        {
+          "id": "lstm",
+          "title": { "tr": "LSTM", "en": "LSTM" },
+          "status": "done",
+          "detail": {
+            "tr": "Paket dizileri üzerinde maskeli LSTM.",
+            "en": "Masked LSTM over packet sequences."
+          }
+        }
+      ],
+      [
+        {
+          "id": "cv",
+          "title": { "tr": "Grup bazlı çapraz doğrulama", "en": "Group-aware cross-validation" },
+          "status": "done",
+          "detail": {
+            "tr": "Aynı yakalamanın akışları hiçbir zaman hem eğitim hem testte olmaz; her test katmanında iki sınıf da bulunur. Altyapı hazır; şu ana kadarki skorlar sentetik demo verisinden.",
+            "en": "Flows from one capture never appear in both training and test; every test fold contains both classes. The infrastructure is ready; scores so far come from synthetic demo data."
+          }
+        }
+      ],
+      [
+        {
+          "id": "data",
+          "title": { "tr": "Gerçek araştırma verisi", "en": "Real research data" },
+          "status": "pending",
+          "detail": {
+            "tr": "Sıradaki aşama (12): ilk gerçek veri setini edinmek ve denetlemek. Veri edinme protokolü yazıldı.",
+            "en": "Next phase (12): acquire and audit the first real dataset. The data acquisition protocol is written."
+          }
+        },
+        {
+          "id": "prototype",
+          "title": { "tr": "PCAP C2 tespit prototipi", "en": "PCAP C2 detection prototype" },
+          "status": "planned",
+          "detail": {
+            "tr": "Aşama 13: kaydedilmiş modelle PCAP üzerinde çıkarım. Planlandı.",
+            "en": "Phase 13: inference on PCAPs with a saved model. Planned."
+          }
+        }
+      ]
+    ]
+  },
+  "cursed-ci": {
+    "title": { "tr": "Geliştirme ve doğrulama döngüsü", "en": "Development and validation loop" },
+    "layers": [
+      [
+        {
+          "id": "milestone",
+          "title": { "tr": "Kilometre taşı (ben)", "en": "Milestone (me)" },
+          "status": "done",
+          "detail": { "tr": "Kapsam, kabul ölçütleri, sınırlar.", "en": "Scope, acceptance criteria, limits." }
+        }
+      ],
+      [
+        {
+          "id": "agent",
+          "title": { "tr": "Claude Code (feature branch)", "en": "Claude Code (feature branch)" },
+          "status": "done",
+          "detail": {
+            "tr": "Kod, test sahneleri, DEVLOG ve PR açıklaması. CLAUDE.md kurallarına bağlı.",
+            "en": "Code, test scenes, DEVLOG and PR description. Bound by the CLAUDE.md rules."
+          }
+        }
+      ],
+      [
+        {
+          "id": "headless",
+          "title": { "tr": "Headless test sahneleri", "en": "Headless test scenes" },
+          "status": "done",
+          "detail": {
+            "tr": "Tek oyunculu testler ve iki süreçli ENet ağ testleri.",
+            "en": "Single-player tests and two-process ENet network tests."
+          }
+        },
+        {
+          "id": "ci",
+          "title": { "tr": "GitHub Actions", "en": "GitHub Actions" },
+          "status": "done",
+          "detail": {
+            "tr": "Her push ve PR'da; Godot 4.7.2 SHA-512 doğrulamalı kurulum.",
+            "en": "On every push and PR; Godot 4.7.2 installed with SHA-512 verification."
+          }
+        }
+      ],
+      [
+        {
+          "id": "playtest",
+          "title": { "tr": "Windows oyun testi (ben)", "en": "Windows playtest (me)" },
+          "status": "done",
+          "detail": {
+            "tr": "Görsellik, ses ve his; otomatik testlerin ölçemediği şeyler.",
+            "en": "Visuals, sound and feel; what automated tests can't measure."
+          }
+        }
+      ],
+      [
+        {
+          "id": "merge",
+          "title": { "tr": "Birleştirme veya düzeltme", "en": "Merge or fix" },
+          "status": "done",
+          "detail": {
+            "tr": "Sorun varsa düzeltme commit'i veya yeni PR; yoksa main'e birleştirme.",
+            "en": "If there's a problem, a fix commit or a new PR; otherwise merge into main."
+          }
+        }
+      ]
+    ]
+  },
+  "keystroke": {
+    "title": { "tr": "Değerlendirme hattı", "en": "Evaluation pipeline" },
+    "layers": [
+      [
+        {
+          "id": "dataset",
+          "title": { "tr": "DSL-StrongPassword (51 kullanıcı)", "en": "DSL-StrongPassword (51 users)" },
+          "status": "done",
+          "detail": {
+            "tr": "'.tie5Roanl' parolasının tekrarlı yazımları; tuşa basılı tutma (H), keydown-keydown (DD) ve keyup-keydown (UD) süreleri.",
+            "en": "Repeated typings of the password '.tie5Roanl'; hold (H), keydown-keydown (DD) and keyup-keydown (UD) times."
+          }
+        }
+      ],
+      [
+        {
+          "id": "split",
+          "title": { "tr": "Kullanıcı başına bölme", "en": "Per-user split" },
+          "status": "done",
+          "detail": {
+            "tr": "İlk 200 örnek eğitim, kalanı gerçek test; diğer kullanıcılardan taklitçi örnekleri.",
+            "en": "First 200 samples train, the rest genuine test; impostor samples from the other users."
+          }
+        }
+      ],
+      [
+        {
+          "id": "svm",
+          "title": { "tr": "One-Class SVM", "en": "One-Class SVM" },
+          "status": "done",
+          "detail": { "tr": "RBF çekirdek, z-skor normalizasyonu.", "en": "RBF kernel, z-score normalisation." }
+        },
+        {
+          "id": "maha",
+          "title": { "tr": "Mahalanobis", "en": "Mahalanobis" },
+          "status": "done",
+          "detail": { "tr": "Kovaryans tabanlı mesafe.", "en": "Covariance-based distance." }
+        },
+        {
+          "id": "kmeans",
+          "title": { "tr": "K-Means", "en": "K-Means" },
+          "status": "done",
+          "detail": { "tr": "En yakın küme merkezine mesafe.", "en": "Distance to nearest cluster centre." }
+        },
+        {
+          "id": "nn",
+          "title": { "tr": "Sinir ağları", "en": "Neural nets" },
+          "status": "done",
+          "detail": { "tr": "Standart ve auto-associative.", "en": "Standard and auto-associative." }
+        }
+      ],
+      [
+        {
+          "id": "eer",
+          "title": { "tr": "ROC → EER", "en": "ROC → EER" },
+          "status": "done",
+          "detail": {
+            "tr": "Yanlış kabul ve yanlış ret oranlarının eşitlendiği nokta; 51 kullanıcı üzerinden ortalama ve standart sapma.",
+            "en": "The point where false accept and false reject rates are equal; mean and std over 51 users."
+          }
+        }
+      ]
+    ]
+  },
+  "face-detection": {
+    "title": { "tr": "Sistem akışı", "en": "System flow" },
+    "layers": [
+      [
+        {
+          "id": "source",
+          "title": { "tr": "Görüntü / video / webcam", "en": "Image / video / webcam" },
+          "status": "done",
+          "detail": { "tr": "VideoCaptureManager kaynak türünü algılar.", "en": "VideoCaptureManager detects the source type." }
+        }
+      ],
+      [
+        {
+          "id": "haar",
+          "title": { "tr": "HaarDetector", "en": "HaarDetector" },
+          "status": "done",
+          "detail": { "tr": "Gri tonlama + çok ölçekli Haar Cascade.", "en": "Greyscale + multi-scale Haar Cascade." }
+        },
+        {
+          "id": "dnn",
+          "title": { "tr": "DNNDetector", "en": "DNNDetector" },
+          "status": "done",
+          "detail": { "tr": "300×300 SSD + ResNet-10 Caffe modeli, güven eşiği.", "en": "300×300 SSD + ResNet-10 Caffe model, confidence threshold." }
+        }
+      ],
+      [
+        {
+          "id": "result",
+          "title": { "tr": "DetectionResult", "en": "DetectionResult" },
+          "status": "done",
+          "detail": { "tr": "Kutular, güven skorları, çıkarım süresi, kare indeksi.", "en": "Boxes, confidence scores, inference time, frame index." }
+        }
+      ],
+      [
+        {
+          "id": "profiler",
+          "title": { "tr": "PerformanceProfiler", "en": "PerformanceProfiler" },
+          "status": "done",
+          "detail": { "tr": "FPS, süre istatistikleri; etiket varsa IoU ile precision/recall.", "en": "FPS, timing stats; IoU-based precision/recall when ground truth exists." }
+        }
+      ],
+      [
+        {
+          "id": "gui",
+          "title": { "tr": "Tkinter GUI", "en": "Tkinter GUI" },
+          "status": "done",
+          "detail": { "tr": "Canlı görüntü, metrik paneli, eşik kaydırıcı.", "en": "Live view, metrics panel, threshold slider." }
+        },
+        {
+          "id": "export",
+          "title": { "tr": "CSV / JSON / TXT + grafikler", "en": "CSV / JSON / TXT + charts" },
+          "status": "done",
+          "detail": { "tr": "Karşılaştırma grafikleri ve özet rapor.", "en": "Comparison charts and summary report." }
+        }
+      ]
+    ]
+  },
+  "rl-loop": {
+    "title": { "tr": "DQN eğitim döngüsü", "en": "DQN training loop" },
+    "layers": [
+      [
+        {
+          "id": "state",
+          "title": { "tr": "Durum s (4 boyut)", "en": "State s (4-dim)" },
+          "status": "done",
+          "detail": { "tr": "Araba konumu/hızı, çubuk açısı/açısal hızı.", "en": "Cart position/velocity, pole angle/angular velocity." }
+        }
+      ],
+      [
+        {
+          "id": "q",
+          "title": { "tr": "Q-ağı 4→128→2", "en": "Q-network 4→128→2" },
+          "status": "done",
+          "detail": { "tr": "Her eylem için beklenen getiriyi tahmin eder.", "en": "Predicts the expected return of each action." }
+        }
+      ],
+      [
+        {
+          "id": "action",
+          "title": { "tr": "ε-greedy eylem", "en": "ε-greedy action" },
+          "status": "done",
+          "detail": { "tr": "ε olasılıkla rastgele, yoksa argmax Q.", "en": "Random with probability ε, otherwise argmax Q." }
+        }
+      ],
+      [
+        {
+          "id": "env",
+          "title": { "tr": "CartPole-v1 ortamı", "en": "CartPole-v1 environment" },
+          "status": "done",
+          "detail": { "tr": "Ödül r ve yeni durum s′ döner.", "en": "Returns reward r and next state s′." }
+        }
+      ],
+      [
+        {
+          "id": "update",
+          "title": { "tr": "TD güncellemesi", "en": "TD update" },
+          "status": "done",
+          "detail": { "tr": "Hedef r + γ·max Q(s′); MSE kaybı, Adam. Replay buffer ve hedef ağı yok.", "en": "Target r + γ·max Q(s′); MSE loss, Adam. No replay buffer or target network." }
+        }
+      ]
+    ]
+  },
+  "cerberion": {
+    "title": { "tr": "Prototip mimarisi", "en": "Prototype architecture" },
+    "layers": [
+      [
+        {
+          "id": "ad",
+          "title": { "tr": "Active Directory (LDAP)", "en": "Active Directory (LDAP)" },
+          "status": "done",
+          "detail": { "tr": "Kullanıcılar, gruplar, üyelikler, lastLogonTimestamp.", "en": "Users, groups, memberships, lastLogonTimestamp." }
+        }
+      ],
+      [
+        {
+          "id": "neo4j",
+          "title": { "tr": "Neo4j grafı", "en": "Neo4j graph" },
+          "status": "done",
+          "detail": { "tr": "(:User)-[:MEMBER_OF]->(:Group)", "en": "(:User)-[:MEMBER_OF]->(:Group)" }
+        }
+      ],
+      [
+        {
+          "id": "analyzer",
+          "title": { "tr": "SecurityAnalyzer (Cypher)", "en": "SecurityAnalyzer (Cypher)" },
+          "status": "done",
+          "detail": { "tr": "Dolaylı yöneticiler; 90+ gün pasif yöneticiler.", "en": "Indirect admins; admins inactive for 90+ days." }
+        }
+      ],
+      [
+        {
+          "id": "ui",
+          "title": { "tr": "FastAPI → React paneli", "en": "FastAPI → React dashboard" },
+          "status": "done",
+          "detail": { "tr": "Ant Design kartları ve tablolar.", "en": "Ant Design cards and tables." }
+        }
+      ]
+    ]
+  }
+}

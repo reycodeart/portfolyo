@@ -1,0 +1,46 @@
+[
+  {
+    "kind": "education",
+    "org": "Muğla Sıtkı Koçman Üniversitesi",
+    "role": { "tr": "Bilişim Sistemleri Mühendisliği, Lisans", "en": "B.Sc. Information Systems Engineering" },
+    "period": "– 2026",
+    "points": [
+      {
+        "tr": "TÜBİTAK 2209-A araştırma projesi: TLS 1.3 şifreli trafikte akış meta verisiyle C2 tespiti (devam ediyor).",
+        "en": "TÜBİTAK 2209-A research project: C2 detection from TLS 1.3 flow metadata (ongoing)."
+      },
+      {
+        "tr": "Mühendislik projesi: Keystroke dynamics ile davranışsal biyometrik doğrulama.",
+        "en": "Engineering project: behavioural biometric authentication with keystroke dynamics."
+      }
+    ]
+  },
+  {
+    "kind": "work",
+    "org": "Bilgibim Technology",
+    "role": { "tr": "SOC Analyst Stajyeri", "en": "SOC Analyst Intern" },
+    "period": "2025",
+    "points": []
+  },
+  {
+    "kind": "work",
+    "org": "CFSS Cyber & Forensics Security Solutions",
+    "role": { "tr": "Siber Güvenlik Stajyeri", "en": "Cybersecurity Intern" },
+    "period": "2024",
+    "points": []
+  },
+  {
+    "kind": "work",
+    "org": "Muğla Sıtkı Koçman Üniversitesi",
+    "role": { "tr": "Yarı Zamanlı BT Personeli", "en": "Part-Time IT Staff" },
+    "period": "2023 – 2024",
+    "points": []
+  },
+  {
+    "kind": "work",
+    "org": "ETİ Maden İşletmeleri",
+    "role": { "tr": "Stajyer", "en": "Intern" },
+    "period": "2022",
+    "points": []
+  }
+]

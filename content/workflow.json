@@ -1,0 +1,251 @@
+{
+  "intro": {
+    "tr": "Cursed Couriers'ta kullandığım AI destekli geliştirme döngüsü. Her aşamaya tıklayarak kimin sorumlu olduğunu ve gerçek bir PR'daki karşılığını görebilirsiniz.",
+    "en": "The AI-assisted development loop I used on Cursed Couriers. Click any stage to see who owns it and what it looked like in a real PR."
+  },
+  "stages": [
+    {
+      "id": "problem",
+      "title": {
+        "tr": "Problem Tanımı",
+        "en": "Problem Definition"
+      },
+      "owner": "me",
+      "description": {
+        "tr": "Bir sonraki kilometre taşını ve neden gerekli olduğunu belirliyorum. Kapsam bir PR'a sığacak kadar küçük tutuluyor.",
+        "en": "I decide the next milestone and why it's needed. The scope is kept small enough for one PR."
+      },
+      "example": {
+        "tr": "Week 9D-B1: vardiya başına bir 'perili teslimat' karşılaşması — The Wrong Door.",
+        "en": "Week 9D-B1: one 'haunted delivery' encounter per shift — The Wrong Door."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "PR #35",
+            "en": "PR #35"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/pull/35",
+          "kind": "pr",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "requirements",
+      "title": {
+        "tr": "Gereksinimler",
+        "en": "Requirements"
+      },
+      "owner": "me",
+      "description": {
+        "tr": "Kabul ölçütleri ve sınırlar: mevcut oynanış korunur, aynı tohum aynı sonucu verir, para iki kez ödenmez, hiçbir paket kaybolmaz. Kalıcı kurallar CLAUDE.md'de.",
+        "en": "Acceptance criteria and limits: existing gameplay is preserved, a seed reproduces the same result, money is never paid twice, no package can be lost. Standing rules live in CLAUDE.md."
+      },
+      "example": {
+        "tr": "PR #35: 'Gerçek adres, görev ve paket asla değişmez; hiçbir şey kilitlenmez, hiçbir şey iki kez ödenmez.'",
+        "en": "PR #35: 'The real address, the mission and the package never change; nothing can softlock, nothing can be paid twice.'"
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "CLAUDE.md kuralları",
+            "en": "CLAUDE.md rules"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/blob/main/CLAUDE.md",
+          "kind": "doc",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "implementation",
+      "title": {
+        "tr": "AI Destekli Uygulama",
+        "en": "AI-Assisted Implementation"
+      },
+      "owner": "ai",
+      "description": {
+        "tr": "Claude Code bir feature branch üzerinde kodu, test sahnelerini, DEVLOG girdisini ve PR açıklamasını yazıyor.",
+        "en": "Claude Code writes the code, test scenes, DEVLOG entry and PR description on a feature branch."
+      },
+      "example": {
+        "tr": "PR #35: 37 dosya, +2.200 / −7 satır, 2 commit.",
+        "en": "PR #35: 37 files, +2,200 / −7 lines, 2 commits."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "PR #35 dosyaları",
+            "en": "PR #35 files"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/pull/35/files",
+          "kind": "pr",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "title": {
+        "tr": "Kod İncelemesi",
+        "en": "Code Review"
+      },
+      "owner": "me",
+      "description": {
+        "tr": "PR açıklamasını, değişen dosyaları ve bilinen sınırlamaları okuyorum; kapsam dışı değişiklik veya kural ihlali arıyorum.",
+        "en": "I read the PR description, changed files and known limitations, looking for out-of-scope changes or rule violations."
+      },
+      "example": {
+        "tr": "PR #30, birleşmiş PR #29'a ayrı bir düzeltme PR'ı olarak açıldı; yalnızca ses değişti, tetikleyiciler ve ağ kodu aynı kaldı.",
+        "en": "PR #30 was opened as a separate correction to the already-merged PR #29; only the audio changed, triggers and networking stayed the same."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "PR #30",
+            "en": "PR #30"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/pull/30",
+          "kind": "pr",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "tests",
+      "title": {
+        "tr": "Otomatik Testler",
+        "en": "Automated Tests"
+      },
+      "owner": "automated",
+      "description": {
+        "tr": "GitHub Actions her push ve PR'da tüm headless test sahnelerini çalıştırıyor. Çıkış kodu, zaman aşımı veya tek bir SCRIPT ERROR testi başarısız sayıyor.",
+        "en": "GitHub Actions runs every headless test scene on each push and PR. An exit code, a timeout or a single SCRIPT ERROR fails the run."
+      },
+      "example": {
+        "tr": "PR #35 CI: 39 test sahnesi, 1.817 kontrol, 0 hata (CI logundan toplandı).",
+        "en": "PR #35 CI: 39 test scenes, 1,817 checks, 0 failures (summed from the CI log)."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "PR #35 CI çalıştırması",
+            "en": "PR #35 CI run"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38667898519",
+          "kind": "ci",
+          "private": true
+        },
+        {
+          "label": {
+            "tr": "CI iş akışı",
+            "en": "CI workflow"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/blob/main/.github/workflows/tests.yml",
+          "kind": "ci",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "manual",
+      "title": {
+        "tr": "Manuel Doğrulama",
+        "en": "Manual Validation"
+      },
+      "owner": "me",
+      "description": {
+        "tr": "Windows'ta oyunu oynuyorum. Otomatik testler görselliği ve hissi ölçemez; bu yüzden manuel inceleme ayrı bir adım.",
+        "en": "I play the game on Windows. Automated tests can't judge visuals or feel, so manual review is a separate step."
+      },
+      "example": {
+        "tr": "PR #29 birleştikten sonra Windows testinde araç sesleri sert ve kırpılmış bulundu.",
+        "en": "After PR #29 merged, the Windows playtest found the van sounds harsh and clipping."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "PR #30 açıklaması (denetim bölümü)",
+            "en": "PR #30 description (audit section)"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/pull/30",
+          "kind": "pr",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "revision",
+      "title": {
+        "tr": "Revizyon",
+        "en": "Revision"
+      },
+      "owner": "shared",
+      "description": {
+        "tr": "CI veya oyun testi bir sorun bulursa düzeltme aynı PR'a ya da yeni bir PR'a gidiyor ve döngü testlerden yeniden başlıyor.",
+        "en": "If CI or a playtest finds a problem, the fix goes to the same PR or a new one and the loop restarts at the tests."
+      },
+      "example": {
+        "tr": "PR #34: net_curse_test 1 kontrolde başarısız → 653b434 düzeltmesi → CI yeşil.",
+        "en": "PR #34: net_curse_test failed one check → fix 653b434 → CI green."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "Başarısız CI çalıştırması",
+            "en": "Failing CI run"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38658737911",
+          "kind": "ci",
+          "private": true
+        },
+        {
+          "label": {
+            "tr": "Düzeltme commit'i",
+            "en": "Fix commit"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/commit/653b43456823f16303dbff7611f5f276f6a9ea91",
+          "kind": "commit",
+          "private": true
+        },
+        {
+          "label": {
+            "tr": "Yeşil CI çalıştırması",
+            "en": "Green CI run"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38660064542",
+          "kind": "ci",
+          "private": true
+        }
+      ]
+    },
+    {
+      "id": "merge",
+      "title": {
+        "tr": "Git Commit / Pull Request",
+        "en": "Git Commit / Pull Request"
+      },
+      "owner": "me",
+      "description": {
+        "tr": "CI yeşil ve manuel test tamam olduğunda PR'ı main'e ben birleştiriyorum. CLAUDE.md kuralı: ajan main'e onaysız push etmez, her iş branch + PR üzerinden gelir.",
+        "en": "When CI is green and the manual test is done, I merge the PR into main. CLAUDE.md rule: the agent never pushes to main without approval; all work arrives via branch + PR."
+      },
+      "example": {
+        "tr": "35 PR main'e birleştirildi; merge commit'leri benim hesabımdan.",
+        "en": "35 PRs merged into main; the merge commits come from my account."
+      },
+      "evidence": [
+        {
+          "label": {
+            "tr": "Birleştirilmiş PR'lar",
+            "en": "Merged PRs"
+          },
+          "url": "https://github.com/reycodeart/cursed-couriers/pulls?q=is%3Apr+is%3Amerged",
+          "kind": "pr",
+          "private": true
+        }
+      ]
+    }
+  ]
+}

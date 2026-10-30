@@ -1,0 +1,100 @@
+{
+  "slug": "cerberion",
+  "order": 6,
+  "featured": false,
+  "title": "Cerberion",
+  "subtitle": {
+    "tr": "Active Directory yetki ilişkilerini graf veritabanında analiz eden erken prototip",
+    "en": "Early prototype that analyses Active Directory privilege relationships in a graph database"
+  },
+  "status": "prototype",
+  "statusNote": {
+    "tr": "Erken prototip (Ağustos 2025). Test yok, üretim için uygun değil.",
+    "en": "Early prototype (August 2025). No tests; not suitable for production."
+  },
+  "visibility": "private",
+  "repoUrl": "https://github.com/reycodeart/cerberion",
+  "period": "2025",
+  "summary": {
+    "tr": "LDAP ile AD kullanıcı, grup ve üyeliklerini çekip Neo4j'e yazan; Cypher sorgularıyla dolaylı yönetici üyeliklerini ve 90 günden uzun pasif yönetici hesaplarını bulan FastAPI + React prototipi.",
+    "en": "A FastAPI + React prototype that pulls AD users, groups and memberships over LDAP into Neo4j and uses Cypher queries to find indirect admin memberships and admin accounts inactive for over 90 days."
+  },
+  "tags": ["Python", "FastAPI", "ldap3", "Neo4j", "Cypher", "React", "TypeScript", "Ant Design", "Docker Compose"],
+  "categories": ["security", "software", "data"],
+  "authorship": {
+    "mode": "own-code",
+    "note": {
+      "tr": "Prototip kodu (~430 satır), tek commit olarak yüklendi.",
+      "en": "Prototype code (~430 lines), uploaded as a single commit."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "AD'de yetkiler iç içe gruplarla dolaylı olarak devralınır; bir kullanıcının gerçekte yönetici olup olmadığı düz listelerden zor görülür. Unutulmuş, pasif yönetici hesapları da saldırı yüzeyidir.",
+      "en": "In AD, privileges are inherited indirectly through nested groups, so it is hard to see from flat lists whether a user is effectively an admin. Forgotten, dormant admin accounts are also attack surface."
+    },
+    "approach": [
+      {
+        "tr": "Kullanıcı ve grupları düğüm, üyelikleri MEMBER_OF kenarı olarak modellemek; değişken uzunluklu yol sorgusu (MEMBER_OF*1..) ile dolaylı üyelikleri bulmak.",
+        "en": "Model users and groups as nodes and memberships as MEMBER_OF edges; find indirect memberships with a variable-length path query (MEMBER_OF*1..)."
+      }
+    ],
+    "architecture": {
+      "diagram": "cerberion",
+      "text": {
+        "tr": "AD (LDAP) → ADConnector → Neo4j → SecurityAnalyzer (Cypher) → FastAPI uç noktaları → React/Ant Design paneli.",
+        "en": "AD (LDAP) → ADConnector → Neo4j → SecurityAnalyzer (Cypher) → FastAPI endpoints → React/Ant Design dashboard."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "Üç uç nokta: senkronizasyon, pasif yöneticiler, yetkili hesaplar. lastLogonTimestamp değeri Unix zamanına çevriliyor.",
+        "en": "Three endpoints: sync, dormant admins, privileged accounts. lastLogonTimestamp is converted to Unix time."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Fikir, veri modeli, backend ve panel.",
+        "en": "Idea, data model, backend and dashboard."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "Otomatik test yok; gerçek veya laboratuvar AD ortamına karşı yapılmış bir doğrulama kaydı depoda bulunmuyor.",
+        "en": "No automated tests; the repository has no record of validation against a real or lab AD environment."
+      }
+    ],
+    "results": {
+      "items": [],
+      "tables": [],
+      "note": {
+        "tr": "Ölçülmüş bir sonuç yok.",
+        "en": "No measured results."
+      }
+    },
+    "limitations": [
+      {
+        "tr": "AD ve veritabanı kimlik bilgileri istek gövdesinde taşınıyor; kimlik doğrulama yok. Gerçek bir ortamda kullanılmadan önce yeniden tasarlanmalı.",
+        "en": "AD and database credentials travel in the request body and there is no authentication. It needs a redesign before use in a real environment."
+      },
+      {
+        "tr": "Her senkronizasyon veritabanını tamamen siliyor; yönetici grubu tespiti grup adında 'Admin'/'Yönetici' geçmesine dayanıyor (SID tabanlı değil).",
+        "en": "Every sync wipes the database; admin group detection relies on 'Admin'/'Yönetici' in the group name (not SID-based)."
+      }
+    ],
+    "evidence": [
+      {
+        "label": { "tr": "Güvenlik analiz sorguları", "en": "Security analysis queries" },
+        "url": "https://github.com/reycodeart/cerberion/blob/main/backend/app/analysis/security_analyzer.py",
+        "kind": "file",
+        "private": true
+      },
+      {
+        "label": { "tr": "AD bağlayıcısı", "en": "AD connector" },
+        "url": "https://github.com/reycodeart/cerberion/blob/main/backend/app/connectors/ad_connector.py",
+        "kind": "file",
+        "private": true
+      }
+    ]
+  }
+}

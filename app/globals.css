@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #070b16;
+  --color-surface: #0c1324;
+  --color-surface-2: #111a30;
+  --color-line: #1c2741;
+  --color-line-strong: #2a3858;
+  --color-ink: #e6ecf7;
+  --color-ink-2: #a9b4cc;
+  --color-ink-3: #75819c;
+  --color-accent: #3b82f6;
+  --color-accent-2: #22d3ee;
+  --color-ok: #34d399;
+  --color-warn: #fbbf24;
+  --color-muted: #94a3b8;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Faint engineering grid behind the hero. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(59 130 246 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(59 130 246 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-2);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

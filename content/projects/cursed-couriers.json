@@ -1,0 +1,293 @@
+{
+  "slug": "cursed-couriers",
+  "order": 2,
+  "featured": true,
+  "title": "Cursed Couriers",
+  "subtitle": {
+    "tr": "Claude Code ile, test ve CI kapısıyla yürütülen bir Godot oyun projesi",
+    "en": "A Godot game built with Claude Code behind a test and CI gate"
+  },
+  "status": "ongoing",
+  "statusNote": {
+    "tr": "Aktif geliştirme. 35 PR birleştirildi (9–15 Ekim 2026).",
+    "en": "In active development. 35 PRs merged (9–15 October 2026)."
+  },
+  "visibility": "private",
+  "repoUrl": "https://github.com/reycodeart/cursed-couriers",
+  "period": "2026",
+  "summary": {
+    "tr": "Birinci şahıs, iki kişilik co-op paket teslim oyunu. Asıl göstermek istediğim: AI destekli geliştirmeyi kilometre taşları, kurallar dosyası, otomatik testler, CI ve manuel oyun testiyle nasıl yönettiğim.",
+    "en": "A first-person, two-player co-op package delivery game. What it really shows: how I run AI-assisted development with milestones, a rules file, automated tests, CI and manual playtesting."
+  },
+  "tags": [
+    "Godot 4.7",
+    "GDScript",
+    "Claude Code",
+    "GitHub Actions",
+    "ENet networking",
+    "Headless tests"
+  ],
+  "categories": [
+    "agents",
+    "software",
+    "testing",
+    "game"
+  ],
+  "authorship": {
+    "mode": "ai-assisted",
+    "note": {
+      "tr": "Oyun kodu ve test sahneleri Claude Code tarafından yazıldı (commit'ler 'claude' kullanıcısıyla). Kilometre taşlarını, gereksinimleri ve kuralları ben belirledim; Windows'ta oyun testlerini yaptım, PR'ları inceleyip birleştirdim.",
+      "en": "The game code and test scenes were written by Claude Code (commits are authored by the 'claude' user). I set the milestones, requirements and rules, ran the Windows playtests, and reviewed and merged the PRs."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "Bir AI kodlama ajanı hızlı kod üretir, ama 'testler geçti' demesi testlerin gerçekten çalıştığı anlamına gelmez; oyun mekaniği sessizce bozulabilir, ağ senkronu kaybolabilir. Amaç: Ajanın çıktısını her adımda doğrulanabilir kılan bir geliştirme süreci kurmak.",
+      "en": "An AI coding agent produces code quickly, but 'tests passed' doesn't mean tests actually ran; mechanics can silently regress and network sync can break. The goal: a development process where the agent's output is verifiable at every step."
+    },
+    "approach": [
+      {
+        "tr": "Önce test altyapısı: PR #1 yalnızca Godot kurulumu (SHA-512 doğrulamalı), headless test koşucusu, CI ve kurallar dosyası (CLAUDE.md) ekledi; oyun koduna dokunmadı.",
+        "en": "Test infrastructure first: PR #1 only added the Godot installer (SHA-512 verified), a headless test runner, CI and the rules file (CLAUDE.md); no gameplay code changed."
+      },
+      {
+        "tr": "CLAUDE.md kuralları: mevcut oynanışı koru, kapsam dışına çıkma, testler gerçekten çalışmadıysa geçti deme, main'e onaysız push yok, ücretli/lisanssız asset yok.",
+        "en": "CLAUDE.md rules: preserve existing gameplay, stay in scope, never claim tests passed unless they ran, no push to main without approval, no paid or unlicensed assets."
+      },
+      {
+        "tr": "Her kilometre taşı ayrı bir PR; PR açıklaması test sonuçlarını ve bilinen sınırlamaları içeriyor; ben Windows'ta oynayıp birleştirme kararı veriyorum.",
+        "en": "Each milestone is its own PR whose description includes test results and known limitations; I playtest on Windows and decide whether to merge."
+      }
+    ],
+    "architecture": {
+      "diagram": "cursed-ci",
+      "text": {
+        "tr": "Döngü: Kilometre taşı ve gereksinimler → Claude Code uygulaması (feature branch) → headless test sahneleri → GitHub Actions CI (her push ve PR'da) → Windows'ta manuel oyun testi → gerekirse düzeltme PR'ı → birleştirme.",
+        "en": "Loop: milestone and requirements → Claude Code implementation (feature branch) → headless test scenes → GitHub Actions CI (every push and PR) → manual Windows playtest → follow-up fix PR if needed → merge."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "Tohumlu (seeded) görev üretimi: aynı tohum her zaman aynı görevleri ve olay programını üretiyor; bu, testleri deterministik kılıyor.",
+        "en": "Seeded mission generation: the same seed always produces the same missions and event schedule, which makes tests deterministic."
+      },
+      {
+        "tr": "Kalıcı ilerleme tek bir autoload'da (Progression); her para hareketi benzersiz işlem kimliği taşıyor, böylece hiçbir şey iki kez ödenmiyor.",
+        "en": "Persistent progress lives in a single autoload (Progression); every money movement carries a unique transaction id so nothing is paid twice."
+      },
+      {
+        "tr": "Co-op: host-otoriter ağ modeli (ENet); istemci mesajları host tarafından doğrulanıyor, sahte mesajlar reddediliyor.",
+        "en": "Co-op: host-authoritative networking (ENet); client messages are validated by the host, forged messages are refused."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Test altyapısı PR'ı (#1) ve ardından gelen 34 kilometre taşı PR'ı için gereksinimleri ve kapsamı tanımladım (Week 3.6 – Week 9D).",
+        "en": "Defined requirements and scope for the test-infrastructure PR (#1) and the 34 milestone PRs that followed (Week 3.6 – Week 9D)."
+      },
+      {
+        "tr": "Windows'ta oyun testi yaptım. Örnek: PR #29 birleştikten sonra araç seslerini sert ve kırpılmış buldum; bu geri bildirim PR #30 düzeltmesine yol açtı.",
+        "en": "Playtested on Windows. Example: after PR #29 merged I found the van sounds harsh and clipping; that feedback led to the PR #30 correction."
+      },
+      {
+        "tr": "PR'ları inceleyip birleştirme kararını verdim; PR #35'te açıklamaya 'Windows oyun testi bitmeden birleştirme' notu düşüldü.",
+        "en": "Reviewed the PRs and made the merge decisions; PR #35's description explicitly says not to merge before the Windows gameplay review."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "Test koşucusu bir sahneyi; sıfır olmayan çıkış, zaman aşımı veya tek bir 'SCRIPT ERROR' satırında başarısız sayıyor.",
+        "en": "The runner fails a scene on a non-zero exit, a timeout or a single 'SCRIPT ERROR' line."
+      },
+      {
+        "tr": "Ağ testleri iki ayrı Godot sürecini gerçek ENet üzerinden çalıştırıyor (host + istemci probu).",
+        "en": "Network tests run two separate Godot processes over real ENet (host + client probe)."
+      },
+      {
+        "tr": "CI gerçek hataları yakaladı: PR #34'te net_curse_test 1 kontrolde başarısız oldu (39 ok, 1 failed); düzeltme commit'inden sonra CI yeşile döndü.",
+        "en": "CI caught real failures: on PR #34 net_curse_test failed one check (39 ok, 1 failed); after the fix commit CI went green."
+      },
+      {
+        "tr": "PR #1'de kararsız (flaky) bir test 22 çalıştırmanın 5'inde yeniden üretildi, kök nedeni (fizik tiki zamanlaması) bulundu ve 30/30 geçecek şekilde düzeltildi.",
+        "en": "In PR #1 a flaky test was reproduced in 5 of 22 runs, its root cause (physics tick timing) was found, and it was fixed to pass 30/30."
+      }
+    ],
+    "results": {
+      "items": [
+        {
+          "label": {
+            "tr": "PR #35 CI: test sahnesi",
+            "en": "PR #35 CI: test scenes"
+          },
+          "value": "39 / 39 passed",
+          "verification": "ci-log",
+          "source": "https://github.com/reycodeart/cursed-couriers/actions/runs/38667898519"
+        },
+        {
+          "label": {
+            "tr": "PR #35 CI: kontrol sayısı",
+            "en": "PR #35 CI: checks"
+          },
+          "value": "1,817 ok · 0 failed",
+          "verification": "ci-log",
+          "source": "https://github.com/reycodeart/cursed-couriers/actions/runs/38667898519"
+        },
+        {
+          "label": {
+            "tr": "Birleştirilen PR",
+            "en": "Merged PRs"
+          },
+          "value": "35",
+          "verification": "repo-file",
+          "source": "https://github.com/reycodeart/cursed-couriers/pulls?q=is%3Apr+is%3Amerged"
+        },
+        {
+          "label": {
+            "tr": "Son 100 CI çalıştırması",
+            "en": "Last 100 CI runs"
+          },
+          "value": "95 success · 3 failure · 2 cancelled",
+          "verification": "ci-log",
+          "source": "https://github.com/reycodeart/cursed-couriers/actions"
+        }
+      ],
+      "tables": [
+        {
+          "caption": {
+            "tr": "Seçilmiş PR'lar ve ne gösterdikleri",
+            "en": "Selected PRs and what they show"
+          },
+          "columns": [
+            {
+              "tr": "PR",
+              "en": "PR"
+            },
+            {
+              "tr": "Konu",
+              "en": "Topic"
+            },
+            {
+              "tr": "Doğrulama",
+              "en": "Validation"
+            }
+          ],
+          "rows": [
+            [
+              "#1",
+              "Test infrastructure, CI, CLAUDE.md",
+              "218 checks; flaky test root-caused (5/22 → 30/30)"
+            ],
+            [
+              "#29 → #30",
+              "Van audio → quality correction",
+              "Windows playtest feedback; van_audio_test 32 → 53 checks"
+            ],
+            [
+              "#34",
+              "Cursed Parcel (co-op)",
+              "CI failed 1 check; fixed in 653b434; CI green"
+            ],
+            [
+              "#35",
+              "The Wrong Door encounter",
+              "wrong_door_test 32 + net_door_test 30; suite 39 scenes / 1,817 checks"
+            ]
+          ],
+          "verification": "ci-log",
+          "note": {
+            "tr": "#35 için sayılar CI logundan toplandı. #1 ve #30'daki sayılar PR açıklamalarından (Claude Code tarafından yazıldı) alındı.",
+            "en": "The #35 numbers were summed from the CI log. The #1 and #30 numbers come from the PR descriptions (written by Claude Code)."
+          }
+        }
+      ]
+    },
+    "limitations": [
+      {
+        "tr": "Kod AI tarafından yazıldı; GDScript'i satır satır yazdığımı iddia etmiyorum.",
+        "en": "The code was written by AI; I don't claim to have written the GDScript line by line."
+      },
+      {
+        "tr": "Headless testler görselliği ve oyun hissini ölçmüyor; bunlar manuel Windows testine bağlı.",
+        "en": "Headless tests don't cover visuals or game feel; those depend on manual Windows playtests."
+      },
+      {
+        "tr": "Depo özel (private); dışarıdan inceleme erişim izni gerektiriyor. Steam yayını yapılmadı.",
+        "en": "The repository is private; outside review needs access. Not released on Steam."
+      }
+    ],
+    "evidence": [
+      {
+        "label": {
+          "tr": "PR #35 — The Wrong Door",
+          "en": "PR #35 — The Wrong Door"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/pull/35",
+        "kind": "pr",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "PR #35 CI çalıştırması (yeşil)",
+          "en": "PR #35 CI run (green)"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38667898519",
+        "kind": "ci",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "PR #34 başarısız CI çalıştırması",
+          "en": "PR #34 failing CI run"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38658737911",
+        "kind": "ci",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "PR #34 düzeltme commit'i",
+          "en": "PR #34 fix commit"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/commit/653b43456823f16303dbff7611f5f276f6a9ea91",
+        "kind": "commit",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "PR #30 — oyun testi sonrası düzeltme",
+          "en": "PR #30 — post-playtest correction"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/pull/30",
+        "kind": "pr",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "PR #1 — test altyapısı",
+          "en": "PR #1 — test infrastructure"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/pull/1",
+        "kind": "pr",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "Test koşucusu",
+          "en": "Test runner"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/blob/main/scripts/run_tests.sh",
+        "kind": "file",
+        "private": true
+      },
+      {
+        "label": {
+          "tr": "AI kuralları (CLAUDE.md)",
+          "en": "AI rules (CLAUDE.md)"
+        },
+        "url": "https://github.com/reycodeart/cursed-couriers/blob/main/CLAUDE.md",
+        "kind": "doc",
+        "private": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "slug": "face-detection-system",
+  "order": 4,
+  "featured": true,
+  "title": "Face Detection System",
+  "subtitle": {
+    "tr": "Haar Cascade ve DNN (SSD + ResNet) yüz tespitinin hız ve tespit karşılaştırması",
+    "en": "Speed and detection comparison of Haar Cascade and DNN (SSD + ResNet) face detection"
+  },
+  "status": "completed",
+  "visibility": "public",
+  "repoUrl": "https://github.com/reycodeart/face_detection_system",
+  "period": "2026",
+  "summary": {
+    "tr": "Ortak bir detektör arayüzü, performans profilleyici, Tkinter arayüzü ve CLI benchmark modu olan modüler bir OpenCV uygulaması; 20 birim testi var.",
+    "en": "A modular OpenCV application with a shared detector interface, a performance profiler, a Tkinter GUI and a CLI benchmark mode; it has 20 unit tests."
+  },
+  "tags": ["Python", "OpenCV", "Haar Cascade", "DNN (SSD+ResNet)", "Tkinter", "Matplotlib", "pytest"],
+  "categories": ["ai-ml", "software", "testing"],
+  "authorship": {
+    "mode": "own-code",
+    "note": {
+      "tr": "Depo tek bir ilk commit ile yüklendi; git geçmişi geliştirme adımlarını göstermiyor.",
+      "en": "The repository was uploaded as a single initial commit; the git history doesn't show the development steps."
+    }
+  },
+  "caseStudy": {
+    "problem": {
+      "tr": "Klasik Haar Cascade hızlı ama ışık ve açıya hassas; DNN tabanlı SSD daha sağlam ama daha yavaş. Aynı video üzerinde ikisini aynı ölçütlerle ölçüp farkı sayılarla göstermek.",
+      "en": "Classic Haar Cascade is fast but sensitive to lighting and angle; a DNN-based SSD is more robust but slower. The aim: measure both on the same video with the same metrics and show the difference in numbers."
+    },
+    "approach": [
+      {
+        "tr": "Her iki detektör de aynı soyut temel sınıfı (DetectorBase) uyguluyor: load_model, detect, get_name. Böylece profilleyici ve arayüz algoritmadan bağımsız.",
+        "en": "Both detectors implement the same abstract base class (DetectorBase): load_model, detect, get_name. The profiler and GUI are therefore algorithm-agnostic."
+      },
+      {
+        "tr": "Profilleyici kare başına çıkarım süresi, FPS ve tespit sayısını kaydediyor; etiketli veri verilirse IoU ile precision/recall hesaplayabiliyor.",
+        "en": "The profiler records per-frame inference time, FPS and detection count; given ground truth it can compute precision/recall via IoU."
+      }
+    ],
+    "architecture": {
+      "diagram": "face-detection",
+      "text": {
+        "tr": "Kaynak (görüntü / video / webcam) → VideoCaptureManager → seçilen detektör(ler) → DetectionResult → PerformanceProfiler → CSV/JSON/TXT dışa aktarım ve karşılaştırma grafikleri.",
+        "en": "Source (image / video / webcam) → VideoCaptureManager → selected detector(s) → DetectionResult → PerformanceProfiler → CSV/JSON/TXT export and comparison charts."
+      }
+    },
+    "implementation": [
+      {
+        "tr": "core/: DetectorBase, HaarDetector, DNNDetector, DetectionResult, PerformanceProfiler.",
+        "en": "core/: DetectorBase, HaarDetector, DNNDetector, DetectionResult, PerformanceProfiler."
+      },
+      {
+        "tr": "gui/: Tkinter uygulaması, kontrol/metrik/görüntü panelleri, eşik kaydırıcısı ve algoritma seçici.",
+        "en": "gui/: Tkinter app, control/metrics/canvas panels, threshold slider and algorithm selector."
+      },
+      {
+        "tr": "Geçersiz kareler ve parametreler ValueError ile reddediliyor; DNN model dosyaları boyut kontrolüyle doğrulanıyor.",
+        "en": "Invalid frames and parameters are rejected with ValueError; DNN model files are validated with a size check."
+      }
+    ],
+    "contribution": [
+      {
+        "tr": "Modüler mimari, iki detektör, profilleyici, arayüz ve test paketi.",
+        "en": "Modular architecture, both detectors, the profiler, the GUI and the test suite."
+      }
+    ],
+    "testing": [
+      {
+        "tr": "20 pytest testi: Haar, DNN ve profilleyici için.",
+        "en": "20 pytest tests covering Haar, DNN and the profiler."
+      },
+      {
+        "tr": "Denetimde: OpenCV 4.10 ile 20/20 geçti. OpenCV 5.x ile 12 test başarısız (cv2.dnn.readNetFromCaffe kaldırılmış); requirements.txt üst sürüm sınırı koymadığı için yeni kurulumlar bozulabilir.",
+        "en": "In the audit: 20/20 passed with OpenCV 4.10. With OpenCV 5.x, 12 tests fail (cv2.dnn.readNetFromCaffe was removed); because requirements.txt sets no upper bound, fresh installs can break."
+      }
+    ],
+    "results": {
+      "items": [
+        {
+          "label": { "tr": "Denetimde birim testleri (OpenCV 4.10)", "en": "Unit tests in audit (OpenCV 4.10)" },
+          "value": "20 / 20 passed",
+          "verification": "reproduced"
+        }
+      ],
+      "tables": [
+        {
+          "caption": {
+            "tr": "Tek bir oturumdan performans raporu (results/summary.txt)",
+            "en": "Performance report from a single session (results/summary.txt)"
+          },
+          "columns": [
+            { "tr": "Ölçüt", "en": "Metric" },
+            { "tr": "Haar Cascade", "en": "Haar Cascade" },
+            { "tr": "DNN (SSD+ResNet)", "en": "DNN (SSD+ResNet)" }
+          ],
+          "rows": [
+            ["Frames", "715", "714"],
+            ["Mean time (ms)", "9.91", "28.66"],
+            ["Min / Max (ms)", "1.84 / 33.12", "20.76 / 62.24"],
+            ["Std (ms)", "6.54", "8.61"],
+            ["Mean FPS", "100.9", "34.9"],
+            ["Mean detections / frame", "0.70", "0.89"]
+          ],
+          "verification": "repo-file",
+          "note": {
+            "tr": "Donanım ve video kaynağı kayıtlı değil, etiketli veri yok. Bu yüzden 'tespit sayısı' doğruluk değildir; yalnızca hız karşılaştırması olarak okunmalı.",
+            "en": "Hardware and video source are not recorded and there is no ground truth, so 'detections per frame' is not accuracy; read this only as a speed comparison."
+          }
+        }
+      ]
+    },
+    "limitations": [
+      {
+        "tr": "Etiketli veri setiyle precision/recall ölçümü yapılmadı (kod destekliyor, sonuç yok).",
+        "en": "No precision/recall measured on a labelled dataset (the code supports it, there are no results)."
+      },
+      {
+        "tr": "README'deki klasör yapısı gerçek yapıyla uyuşmuyor (detectors/ yerine core/); depoda __pycache__ dosyaları ve 0 baytlık bir Haar XML var (kod OpenCV'nin kendi kopyasına düşüyor).",
+        "en": "The folder structure in the README doesn't match the code (core/ instead of detectors/); the repo contains __pycache__ files and a 0-byte Haar XML (the code falls back to OpenCV's own copy)."
+      },
+      {
+        "tr": "OpenCV sürümü sabitlenmemiş (yukarıya bakın).",
+        "en": "The OpenCV version isn't pinned (see above)."
+      }
+    ],
+    "evidence": [
+      {
+        "label": { "tr": "Performans raporu", "en": "Performance report" },
+        "url": "https://github.com/reycodeart/face_detection_system/blob/main/results/summary.txt",
+        "kind": "data"
+      },
+      {
+        "label": { "tr": "Ortak detektör arayüzü", "en": "Shared detector interface" },
+        "url": "https://github.com/reycodeart/face_detection_system/blob/main/core/detector_base.py",
+        "kind": "file"
+      },
+      {
+        "label": { "tr": "Performans profilleyici", "en": "Performance profiler" },
+        "url": "https://github.com/reycodeart/face_detection_system/blob/main/core/performance_profiler.py",
+        "kind": "file"
+      },
+      {
+        "label": { "tr": "DNN detektörü", "en": "DNN detector" },
+        "url": "https://github.com/reycodeart/face_detection_system/blob/main/core/dnn_detector.py",
+        "kind": "file"
+      },
+      {
+        "label": { "tr": "Testler", "en": "Tests" },
+        "url": "https://github.com/reycodeart/face_detection_system/tree/main/tests",
+        "kind": "test"
+      }
+    ]
+  }
+}

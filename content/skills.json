@@ -1,0 +1,240 @@
+{
+  "note": {
+    "tr": "Seviye puanı yok. Her beceri, onu gösteren kod veya kayıtla listelendi. Kanıtı GitHub'da olmayan beceriler (örneğin staj sırasındaki log analizi) bu listeye bilerek eklenmedi.",
+    "en": "No proficiency scores. Each skill is listed with the code or record that shows it. Skills without GitHub evidence (for example log analysis during internships) are deliberately left out of this list."
+  },
+  "withoutAi": [
+    {
+      "name": { "tr": "Python", "en": "Python" },
+      "detail": {
+        "tr": "Anomali detektörleri, DQN eğitim döngüsü, 2021'den beri temel alıştırmalar.",
+        "en": "Anomaly detectors, a DQN training loop, fundamentals practice since 2021."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "Keystroke Dynamics", "en": "Keystroke Dynamics" },
+          "url": "https://github.com/reycodeart/muhendislikprojem",
+          "kind": "repo"
+        },
+        {
+          "label": { "tr": "RL CartPole", "en": "RL CartPole" },
+          "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole",
+          "kind": "repo"
+        },
+        {
+          "label": { "tr": "Python alıştırmaları (2021–2024)", "en": "Python exercises (2021–2024)" },
+          "url": "https://github.com/reycodeart/python",
+          "kind": "repo"
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Makine öğrenmesi ve algoritma karşılaştırması", "en": "Machine learning & algorithm comparison" },
+      "detail": {
+        "tr": "One-Class SVM, K-Means, Mahalanobis, sinir ağları; EER ile karşılaştırma.",
+        "en": "One-Class SVM, K-Means, Mahalanobis, neural networks; comparison by EER."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "results.csv", "en": "results.csv" },
+          "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/results.csv",
+          "kind": "data"
+        },
+        {
+          "label": { "tr": "svm.py", "en": "svm.py" },
+          "url": "https://github.com/reycodeart/muhendislikprojem/blob/main/svm.py",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Veri işleme (pandas, NumPy)", "en": "Data processing (pandas, NumPy)" },
+      "detail": {
+        "tr": "Veri temizleme, kullanıcı bazlı bölme ve normalizasyon.",
+        "en": "Data cleaning, per-user splitting and normalisation."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "cleaned_data.csv ve detektörler", "en": "cleaned_data.csv and detectors" },
+          "url": "https://github.com/reycodeart/muhendislikprojem",
+          "kind": "repo"
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Pekiştirmeli öğrenme (PyTorch)", "en": "Reinforcement learning (PyTorch)" },
+      "detail": {
+        "tr": "DQN, ε-greedy, TD hedefi; tek ve çoklu agent.",
+        "en": "DQN, ε-greedy, TD target; single and multi-agent."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "single_agent_dqn.py", "en": "single_agent_dqn.py" },
+          "url": "https://github.com/reycodeart/RL-MultiAgent-Gym-CartPole/blob/main/single_agent_dqn.py",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Bilgisayarlı görü (OpenCV)", "en": "Computer vision (OpenCV)" },
+      "detail": {
+        "tr": "Haar Cascade ve DNN yüz tespiti, performans profilleme.",
+        "en": "Haar Cascade and DNN face detection, performance profiling."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "Face Detection System", "en": "Face Detection System" },
+          "url": "https://github.com/reycodeart/face_detection_system",
+          "kind": "repo"
+        }
+      ]
+    },
+    {
+      "name": { "tr": "SQL / Cypher (temel)", "en": "SQL / Cypher (basic)" },
+      "detail": {
+        "tr": "SQLite ile tablo oluşturma ve ekleme; Neo4j'de değişken uzunluklu yol sorguları.",
+        "en": "Creating tables and inserting with SQLite; variable-length path queries in Neo4j."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "veritabani.py", "en": "veritabani.py" },
+          "url": "https://github.com/reycodeart/python/blob/main/veritabani.py",
+          "kind": "file"
+        },
+        {
+          "label": { "tr": "Cerberion Cypher sorguları", "en": "Cerberion Cypher queries" },
+          "url": "https://github.com/reycodeart/cerberion/blob/main/backend/app/analysis/security_analyzer.py",
+          "kind": "file",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Güvenlik odaklı backend (prototip)", "en": "Security-oriented backend (prototype)" },
+      "detail": {
+        "tr": "FastAPI, LDAP ile AD verisi çekme, yetki ilişkisi analizi.",
+        "en": "FastAPI, pulling AD data over LDAP, privilege relationship analysis."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "Cerberion", "en": "Cerberion" },
+          "url": "https://github.com/reycodeart/cerberion",
+          "kind": "repo",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Git ve GitHub", "en": "Git & GitHub" },
+      "detail": {
+        "tr": "Branch, PR, CI ve merge akışı.",
+        "en": "Branch, PR, CI and merge workflow."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "GitHub profili", "en": "GitHub profile" },
+          "url": "https://github.com/reycodeart",
+          "kind": "repo"
+        }
+      ]
+    }
+  ],
+  "aiAssisted": [
+    {
+      "name": { "tr": "Claude Code ile yazılım geliştirme", "en": "Software development with Claude Code" },
+      "detail": {
+        "tr": "35 PR'lık bir Godot projesi ve aşamalı bir araştırma kod tabanı.",
+        "en": "A 35-PR Godot project and a phased research codebase."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "Cursed Couriers PR'ları", "en": "Cursed Couriers PRs" },
+          "url": "https://github.com/reycodeart/cursed-couriers/pulls?q=is%3Apr",
+          "kind": "pr",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Gereksinim ve kural belirleme", "en": "Defining requirements and rules" },
+      "detail": {
+        "tr": "Kilometre taşı kapsamı, kabul ölçütleri ve CLAUDE.md'deki kalıcı kurallar.",
+        "en": "Milestone scope, acceptance criteria and standing rules in CLAUDE.md."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "CLAUDE.md", "en": "CLAUDE.md" },
+          "url": "https://github.com/reycodeart/cursed-couriers/blob/main/CLAUDE.md",
+          "kind": "doc",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Üretilen kodun test edilmesi", "en": "Testing generated code" },
+      "detail": {
+        "tr": "Headless testler + CI kapısı; AI'ın test iddiasını CI loguyla karşılaştırma.",
+        "en": "Headless tests + a CI gate; checking the AI's test claims against the CI log."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "PR #35 CI", "en": "PR #35 CI" },
+          "url": "https://github.com/reycodeart/cursed-couriers/actions/runs/38667898519",
+          "kind": "ci",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "İterasyon ve düzeltme", "en": "Iteration and correction" },
+      "detail": {
+        "tr": "Oyun testi geri bildirimiyle düzeltme PR'ı; CI hatası sonrası düzeltme commit'i.",
+        "en": "A correction PR from playtest feedback; a fix commit after a CI failure."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "PR #30", "en": "PR #30" },
+          "url": "https://github.com/reycodeart/cursed-couriers/pull/30",
+          "kind": "pr",
+          "private": true
+        },
+        {
+          "label": { "tr": "Commit 653b434", "en": "Commit 653b434" },
+          "url": "https://github.com/reycodeart/cursed-couriers/commit/653b43456823f16303dbff7611f5f276f6a9ea91",
+          "kind": "commit",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Sürüm yönetimi", "en": "Version management" },
+      "detail": {
+        "tr": "Kilometre taşı başına bir PR, DEVLOG girdisi ve 'Week N: ...' commit başlıkları.",
+        "en": "One PR per milestone, a DEVLOG entry and 'Week N: ...' commit titles."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "DEVLOG.md", "en": "DEVLOG.md" },
+          "url": "https://github.com/reycodeart/cursed-couriers/blob/main/DEVLOG.md",
+          "kind": "doc",
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": { "tr": "Araştırma yazılımında AI desteği", "en": "AI assistance in research software" },
+      "detail": {
+        "tr": "TLS C2 projesinde aşamalı geliştirme; ruff, black, mypy ve pytest ile CI.",
+        "en": "Phased development on the TLS C2 project; CI with ruff, black, mypy and pytest."
+      },
+      "evidence": [
+        {
+          "label": { "tr": "TLS C2 CI iş akışı", "en": "TLS C2 CI workflow" },
+          "url": "https://github.com/reycodeart/tls-c2-detection/blob/HEAD/.github/workflows/ci.yml",
+          "kind": "ci",
+          "private": true
+        }
+      ]
+    }
+  ]
+}
